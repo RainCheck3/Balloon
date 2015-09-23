@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+  <Resource name="jdbc/balloonDB"
+            auth="Container"
+            type="javax.sql.DataSource"
+            username="Jiaju"
+            password="hunter2"
+            driverClassName="oracle.jdbc.driver.OracleDriver"
+            url="jdbc:oracle:thin:@10.202.48.67:1521:XE"
+            maxActive="8"
+            maxIdle="4"/>
+</Context>

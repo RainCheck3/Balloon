@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Homepage</title>
+    <title>Shop Homepage - Start Bootstrap Template</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,48 +23,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+	<%@include file="header.jsp" %>
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Home</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li >
-                      <li style="left">
-                         <a href="html/Signup.html">Sign up</a>
-                    </li>
-                     <li >
-                         <a href="html/Login.html">Login</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
 
     <!-- Page Content -->
     <div class="container">
@@ -124,9 +87,9 @@
                                 </h4>
                                 <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
                             </div>
-                            <div class="addtoCartt">
-                              <input type="button" value="Add to Cart"/>
-                            </div>
+                            <div class="addtocart">
+                            <p> <input type="button" value="Add to Cart" />   </p>
+                           </div>
                             <div class="ratings">
                                 <p class="pull-right">15 reviews</p>
                                 <p>
@@ -149,9 +112,9 @@
                                 </h4>
                                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                             </div>
-                            <div class="addtoCartt">
-                              <input type="button" value="Add to Cart"/>
-                            </div>
+                            <div class="addtocart">
+                            <p> <input type="button" value="Add to Cart" />   </p>
+                           </div>
                             <div class="ratings">
                                 <p class="pull-right">12 reviews</p>
                                 <p>
@@ -174,9 +137,10 @@
                                 </h4>
                                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                             </div>
-                            <div class="addtoCartt">
-                              <input type="button" value="Add to Cart"/>
-                            </div>
+                            <div class="addtocart">
+                            <p> <input type="button" value="Add to Cart" />   </p>
+                           </div>
+                            
                             <div class="ratings">
                                 <p class="pull-right">31 reviews</p>
                                 <p>
@@ -199,9 +163,9 @@
                                 </h4>
                                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                             </div>
-                            <div class="addtoCartt">
-                              <input type="button" value="Add to Cart"/>
-                            </div>
+                            <div class="addtocart">
+                            <p> <input type="button" value="Add to Cart" />   </p>
+                           </div>
                             <div class="ratings">
                                 <p class="pull-right">6 reviews</p>
                                 <p>
@@ -224,9 +188,9 @@
                                 </h4>
                                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                             </div>
-                            <div class="addtoCartt">
-                              <input type="button" value="Add to Cart"/>
-                            </div>
+                            <div class="addtocart">
+                            <p> <input type="button" value="Add to Cart" />   </p>
+                           </div>
                             <div class="ratings">
                                 <p class="pull-right">18 reviews</p>
                                 <p>
@@ -240,7 +204,7 @@
                         </div>
                     </div>
 
-          
+                   
 
                 </div>
 

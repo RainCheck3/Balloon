@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 import com.sapient.controller.FetchInventoryServlet;
 import com.sapient.model.customer.NewCustomer;
 import com.sapient.model.order.Order;
+import com.sapient.model.order.OrderDetail;
 import com.sapient.model.product.Balloon;
 
 /**
@@ -91,21 +92,40 @@ public class BalloonDaoImpl implements BalloonDao {
 		String shape = balloon.getShape();
 		int quantity = balloon.getQuantity();
 		String productID = price + color + shape;
+		int success = 0;
 
 		try {
-			ps = con.prepareStatement("INSERT INTO PRODUCTS VALUES (?, ?, ?, ?, ?)");
-			ps.setString(1, productID);
-			ps.setDouble(2, price);
-			ps.setString(3, color);
-			ps.setString(4, shape);
-			ps.setInt(5, quantity);
+			// Check if product already exists
+			ps = con.prepareStatement("SELECT ? FROM PRODUCTS WHERE PRODUCTID=?");
+			ps.setInt(1, quantity);
+			ps.setString(2, productID);
+			rs = ps.executeQuery();
 
-			int success = ps.executeUpdate();
+			if (rs.next()) {
+				// Update product count
+				int currentQuantity = rs.getInt(1);
+				ps = con.prepareStatement("UPDATE PRODUCTS SET QUANTITY=? WHERE PRODUCTID=?");
+				ps.setInt(1, currentQuantity + quantity);
+				ps.setString(2, productID);
+				success = ps.executeUpdate();
+				if (success != 0) {
+					log.info("Update count of product successful");
+				}
+			} else {
+				// Insert new entry
+				ps = con.prepareStatement("INSERT INTO PRODUCTS(PRODUCTID, PRICE, COLOR, SHAPE, QUANTITY) VALUES (?, ?, ?, ?, ?)");
+				ps.setString(1, productID);
+				ps.setDouble(2, price);
+				ps.setString(3, color);
+				ps.setString(4, shape);
+				ps.setInt(5, quantity);
 
-			if (success != 0) {
-				log.info("Insert into products successful");
+				success = ps.executeUpdate();
+
+				if (success != 0) {
+					log.info("Insert into products successful");
+				}
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -113,20 +133,20 @@ public class BalloonDaoImpl implements BalloonDao {
 		}
 	}
 
+	// Insert into Order, OrderDetails Table, update products
 	@Override
 	public void placeOrder(Order order) {
-		// TODO Auto-generated method stub
 
 	}
 
-	//Query Customer Table
+	// Query Customer Table
 	@Override
 	public boolean validateLogin(String username, String password) {
 		String validPassword;
-		
+
 		try {
 			ps = con.prepareStatement("SELECT PASSWORD FROM CUSTOMER WHERE CUSTOMERID=?");
-			ps.setString(1, username);
+			ps.setString(1, username.toLowerCase());
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -146,10 +166,10 @@ public class BalloonDaoImpl implements BalloonDao {
 	// Insert into Customer Table
 	@Override
 	public void registerUser(NewCustomer newcustomer) {
-		
+
 		try {
 			ps = con.prepareStatement("INSERT INTO CUSTOMER(CUSTOMERID, FIRSTNAME, LASTNAME, PASSWORD) VALUES (?, ?, ?, ?)");
-			ps.setString(1, newcustomer.getUsername());
+			ps.setString(1, newcustomer.getUsername().toLowerCase());
 			ps.setString(2, newcustomer.getFirstName());
 			ps.setString(3, newcustomer.getLastName());
 			ps.setString(4, newcustomer.getPassword());

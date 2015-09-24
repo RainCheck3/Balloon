@@ -33,10 +33,10 @@ public class FetchInventoryServlet extends HttpServlet {
 		BasicConfigurator.configure();
 		
 		BalloonDao balloonDao = new BalloonDaoImpl();
-		//Balloon balloon = new Balloon(5,"Red", "Square", 20);
+		Balloon balloon = new Balloon(5,"Red", "Square", 10);
 		//Balloon balloon = new Balloon(15,"Green", "Heart", 100);
 		//balloonDao.addBalloon(balloon);
-	
+	   
 		List<Balloon> inventory;
 		//inventory = balloonDao.getInventory();
 		//log.info(inventory.size());
@@ -48,12 +48,15 @@ public class FetchInventoryServlet extends HttpServlet {
 		user.setLastName("Xu");
 		balloonDao.registerUser(user);
 		*/
-		if(balloonDao.validateLogin("Rain", "hunter2")) {
+		/*
+		if(balloonDao.validateLogin("Rain", "Hunter2")) {
 			log.info("login success");
 		}
 		else {
 			log.info("login failed");
-		}
+		}*/ 
+		 
+		balloonDao.addBalloon(balloon);
 		
 		
 		//config.getServletContext().setAttribute("inv", inventory);

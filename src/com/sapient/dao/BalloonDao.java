@@ -9,7 +9,7 @@ import com.sapient.model.product.Balloon;
 public interface BalloonDao {
 	public List<Balloon> getInventory();
 	public void addBalloon(Balloon balloon);
-	public void placeOrder(Order order);
+	public boolean placeOrder(Order order);
 	public boolean validateLogin(String userName, String passWord);
 	public String getDescription( String productid);
 	public void registerUser(NewCustomer newcustomer);

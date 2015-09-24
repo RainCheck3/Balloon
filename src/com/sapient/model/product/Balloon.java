@@ -57,4 +57,7 @@ public class Balloon implements Serializable {
 	public void setShape(String shape) {
 		this.shape = shape;
 	}
+	public String getID() {
+		return price + color + shape;
+	}
 }

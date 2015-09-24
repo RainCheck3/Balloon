@@ -23,7 +23,7 @@ public class Order {
 	public Date getDate() {
 		return date;
 	}
-
+	
 	public void setDate(Date date) {
 		if (date == null) {
 			throw new IllegalArgumentException();

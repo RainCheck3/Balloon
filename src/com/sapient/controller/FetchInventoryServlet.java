@@ -1,6 +1,7 @@
 package com.sapient.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -15,6 +16,8 @@ import org.apache.log4j.Logger;
 import com.sapient.dao.BalloonDao;
 import com.sapient.dao.BalloonDaoImpl;
 import com.sapient.model.customer.NewCustomer;
+import com.sapient.model.order.Order;
+import com.sapient.model.order.OrderDetail;
 import com.sapient.model.product.Balloon;
 
 /**
@@ -33,31 +36,39 @@ public class FetchInventoryServlet extends HttpServlet {
 		BasicConfigurator.configure();
 		
 		BalloonDao balloonDao = new BalloonDaoImpl();
-		Balloon balloon = new Balloon(5,"Red", "Square", 10);
-		//Balloon balloon = new Balloon(15,"Green", "Heart", 100);
+		//Balloon balloon = new Balloon(5,"Red", "Square", 10);
+		Balloon balloon = new Balloon(15,"Green", "Heart", 100);
 		//balloonDao.addBalloon(balloon);
 	   
 		List<Balloon> inventory;
 		//inventory = balloonDao.getInventory();
 		//log.info(inventory.size());
-		/*
+		
 		NewCustomer user = new NewCustomer();
 		user.setUsername("Rain");
 		user.setPassword("hunter2");
 		user.setFirstName("Jiaju");
 		user.setLastName("Xu");
-		balloonDao.registerUser(user);
-		*/
+		//balloonDao.registerUser(user);
+		
 		/*
 		if(balloonDao.validateLogin("Rain", "Hunter2")) {
 			log.info("login success");
 		}
-		else {
+		else { 
 			log.info("login failed");
 		}*/ 
 		 
-		balloonDao.addBalloon(balloon);
+		//balloonDao.addBalloon(balloon);
 		
+		Order order = new Order();
+		OrderDetail orderDetail = new OrderDetail();
+		List<OrderDetail> list = new ArrayList<OrderDetail>();
+		orderDetail.setBalloon(balloon);
+		list.add(orderDetail);
+		order.setCustomer(user);
+		order.setOrderDetail(list);
+		balloonDao.placeOrder(order);
 		
 		//config.getServletContext().setAttribute("inv", inventory);
 	}

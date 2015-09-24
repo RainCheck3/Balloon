@@ -17,6 +17,15 @@ public class NewCustomer {
 	private String state;
 	private String Country;
 	private String Email;
+	private String zip;
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
 	private Order order;
 
 	public String getFirstName() {

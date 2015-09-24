@@ -19,7 +19,9 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import com.sapient.controller.FetchInventoryServlet;
+import com.sapient.model.customer.NewCustomer;
 import com.sapient.model.order.Order;
+import com.sapient.model.order.OrderDetail;
 import com.sapient.model.product.Balloon;
 
 /**
@@ -50,20 +52,17 @@ public class BalloonDaoImpl implements BalloonDao {
 			log.info("DBConnection success");
 
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	
-	// Query the database
+	// Query the Products Table
 	@Override
 	public List<Balloon> getInventory() {
 		List<Balloon> result = new ArrayList<Balloon>();
-		
+
 		try {
 			ps = con.prepareStatement("SELECT * FROM PRODUCTS");
 			rs = ps.executeQuery();
@@ -79,26 +78,13 @@ public class BalloonDaoImpl implements BalloonDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			//Close connections
-			try {
-				if (con != null && !con.isClosed()) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			closeConnections();
 		}
 
 		return result;
 	}
 
-	// Insert into database
+	// Insert into Products Table
 	@Override
 	public void addBalloon(Balloon balloon) {
 		double price = balloon.getPrice();
@@ -106,47 +92,114 @@ public class BalloonDaoImpl implements BalloonDao {
 		String shape = balloon.getShape();
 		int quantity = balloon.getQuantity();
 		String productID = price + color + shape;
+		int success = 0;
 
 		try {
-			ps = con.prepareStatement("INSERT INTO PRODUCTS VALUES (?, ?, ?, ?, ?)");
-			ps.setString(1, productID);
-			ps.setDouble(2, price);
-			ps.setString(3, color);
-			ps.setString(4, shape);
-			ps.setInt(5, quantity);
+			// Check if product already exists
+			ps = con.prepareStatement("SELECT ? FROM PRODUCTS WHERE PRODUCTID=?");
+			ps.setInt(1, quantity);
+			ps.setString(2, productID);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				// Update product count
+				int currentQuantity = rs.getInt(1);
+				ps = con.prepareStatement("UPDATE PRODUCTS SET QUANTITY=? WHERE PRODUCTID=?");
+				ps.setInt(1, currentQuantity + quantity);
+				ps.setString(2, productID);
+				success = ps.executeUpdate();
+				if (success != 0) {
+					log.info("Update count of product successful");
+				}
+			} else {
+				// Insert new entry
+				ps = con.prepareStatement("INSERT INTO PRODUCTS(PRODUCTID, PRICE, COLOR, SHAPE, QUANTITY) VALUES (?, ?, ?, ?, ?)");
+				ps.setString(1, productID);
+				ps.setDouble(2, price);
+				ps.setString(3, color);
+				ps.setString(4, shape);
+				ps.setInt(5, quantity);
+
+				success = ps.executeUpdate();
+
+				if (success != 0) {
+					log.info("Insert into products successful");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConnections();
+		}
+	}
+
+	// Insert into Order, OrderDetails Table, update products
+	@Override
+	public void placeOrder(Order order) {
+
+	}
+
+	// Query Customer Table
+	@Override
+	public boolean validateLogin(String username, String password) {
+		String validPassword;
+
+		try {
+			ps = con.prepareStatement("SELECT PASSWORD FROM CUSTOMER WHERE CUSTOMERID=?");
+			ps.setString(1, username.toLowerCase());
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				validPassword = rs.getString(1);
+				if (password.equals(validPassword)) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConnections();
+		}
+		return false;
+	}
+
+	// Insert into Customer Table
+	@Override
+	public void registerUser(NewCustomer newcustomer) {
+
+		try {
+			ps = con.prepareStatement("INSERT INTO CUSTOMER(CUSTOMERID, FIRSTNAME, LASTNAME, PASSWORD) VALUES (?, ?, ?, ?)");
+			ps.setString(1, newcustomer.getUsername().toLowerCase());
+			ps.setString(2, newcustomer.getFirstName());
+			ps.setString(3, newcustomer.getLastName());
+			ps.setString(4, newcustomer.getPassword());
 
 			int success = ps.executeUpdate();
 
 			if (success != 0) {
-				log.info("Insert successfull");
+				log.info("Insert into customer successful");
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (con != null && !con.isClosed()) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			closeConnections();
 		}
 	}
 
-	@Override
-	public void placeOrder(Order order) {
-		// TODO Auto-generated method stub
-
+	private void closeConnections() {
+		try {
+			if (con != null && !con.isClosed()) {
+				con.close();
+			}
+			if (ps != null) {
+				ps.close();
+			}
+			if (rs != null) {
+				rs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-
-	@Override
-	public boolean validateLogin(String userName, String passWord) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

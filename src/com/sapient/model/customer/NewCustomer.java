@@ -1,18 +1,22 @@
 package com.sapient.model.customer;
 
-import static com.sapient.util.IsNumber.isNumeric;
-
 import com.sapient.model.order.Order;
 
 /**
  * 
- * @author jxu1 This class represents a customer name, address,
- *         and order, along with getter and setter methods for each
+ * @author jxu1 This class represents a customer name, address, and order, along
+ *         with getter and setter methods for each
  */
 public class NewCustomer {
+	private String username;
+	private String password;
 	private String firstName;
 	private String lastName;
-	private String address;
+	private String street;
+	private String city;
+	private String state;
+	private String Country;
+	private String Email;
 	private Order order;
 
 	public String getFirstName() {
@@ -39,17 +43,60 @@ public class NewCustomer {
 		this.lastName = lastName;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setAddress(String address) {
-		if (address.length() < 10 || !(isNumeric(address.substring(0, 1)))) {
-			throw new IllegalArgumentException(
-					"Invalid address, length must be greater than 10 and first character needs to be numeric");
-		} else {
-			this.address = address;
-		}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return Country;
+	}
+
+	public void setCountry(String country) {
+		Country = country;
+	}
+
+	public String getEmail() {
+		return Email;
+	}
+
+	public void setEmail(String email) {
+		Email = email;
 	}
 
 	public Order getOrder() {

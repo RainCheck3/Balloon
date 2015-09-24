@@ -1,0 +1,14 @@
+.center-text{
+	text-align: center;
+}
+.account-input{
+	max-width: 300px;
+}
+.quarter-width{
+	margin-left: auto;
+	margin-right: auto;
+	width: 40%;
+}
+.margin-bottom{
+	margin-bottom: 400px;
+}

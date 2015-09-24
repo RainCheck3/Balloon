@@ -19,7 +19,18 @@ public class Balloon implements Serializable {
 	private String color;
 	private String shape;
 	private int quantity;
-	
+	private String Description;
+	private int starRating;
+	private String Reviews;
+	private String productId;
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
 	//Constructor for testing
 	public Balloon(double price, String color, String shape, int quantity) {
 		this.price = price;
@@ -57,4 +68,30 @@ public class Balloon implements Serializable {
 	public void setShape(String shape) {
 		this.shape = shape;
 	}
+
+	public String getDescription() {
+		return Description;
+	}
+
+	public void setDescription(String description) {
+		Description = description;
+	}
+
+	public int getStarRating() {
+		return starRating;
+	}
+
+	public void setStarRating(int starReview) {
+          this.starRating=starReview;
+	}
+
+	public String getReviews() {
+		return Reviews;
+	}
+
+	public void setReviews(String reviews) {
+		Reviews = reviews;
+	}
+	
+	
 }

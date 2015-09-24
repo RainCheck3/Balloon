@@ -10,4 +10,5 @@ public interface BalloonDao {
 	public void addBalloon(Balloon balloon);
 	public void placeOrder(Order order);
 	public boolean validateLogin(String userName, String passWord);
+	public String getDescription( String productid);
 }

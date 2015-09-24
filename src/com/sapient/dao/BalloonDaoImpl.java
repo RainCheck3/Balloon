@@ -70,10 +70,14 @@ public class BalloonDaoImpl implements BalloonDao {
 
 			while (rs.next()) {
 				Balloon currentBalloon = new Balloon();
+				currentBalloon.setProductId(rs.getString(1));
 				currentBalloon.setPrice(rs.getDouble(2));
 				currentBalloon.setColor(rs.getString(3));
 				currentBalloon.setShape(rs.getString(4));
 				currentBalloon.setQuantity(rs.getInt(5));
+				currentBalloon.setDescription(rs.getString(6));
+				currentBalloon.setReviews(rs.getString(7));
+				currentBalloon.setStarRating(rs.getInt(8));
 				result.add(currentBalloon);
 			}
 		} catch (SQLException e) {
@@ -98,6 +102,38 @@ public class BalloonDaoImpl implements BalloonDao {
 		return result;
 	}
 
+	
+	public String getDescription(String productid)
+	{
+		String desc="";
+		try {
+			ps = con.prepareStatement("SELECT Description FROM PRODUCTS WHERE PRODUCTID=?");
+			ps.setString(1, productid);
+			rs = ps.executeQuery();
+			
+			while(rs.next()){
+				desc = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//Close connections
+			try {
+				if (con != null && !con.isClosed()) {
+					con.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return desc;
+	}
 	// Insert into database
 	@Override
 	public void addBalloon(Balloon balloon) {
@@ -145,7 +181,34 @@ public class BalloonDaoImpl implements BalloonDao {
 
 	@Override
 	public boolean validateLogin(String userName, String passWord) {
-		// TODO Auto-generated method stub
+	
+		try {
+			ps = con.prepareStatement("SELECT * FROM USERS WHERE USERID=? AND PASSWD=?");
+			ps.setString(1, userName);
+			ps.setString(2, passWord);
+			rs = ps.executeQuery();
+			
+			if(rs.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//Close connections
+			try {
+				if (con != null && !con.isClosed()) {
+					con.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return false;
 	}
 

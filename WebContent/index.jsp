@@ -81,7 +81,7 @@
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
                                 <h4 class="pull-right">$${item.price}</h4>
-                                <h4><a href="#">${item.color} Balloon</a>
+                                <h4><a href="Product.jsp?name=${item.productId}?price=${item.price}">${item.color} Balloon</a>
                                 </h4>
                                 <p> Shape : ${item.shape} </p>
                                 <p> Balloons left : ${item.quantity}

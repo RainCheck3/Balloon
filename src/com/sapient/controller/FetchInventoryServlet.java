@@ -32,7 +32,7 @@ public class FetchInventoryServlet extends HttpServlet {
 		BasicConfigurator.configure();
 		
 		BalloonDao balloonDao = new BalloonDaoImpl();
-		Balloon balloon = new Balloon(5,"Red", "Square", 20);
+		Balloon balloon = new Balloon(15,"Green", "Heart", 100);
 		//balloonDao.addBalloon(balloon);
 		List<Balloon> inventory;
 		

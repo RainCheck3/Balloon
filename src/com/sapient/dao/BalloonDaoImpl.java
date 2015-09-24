@@ -18,7 +18,6 @@ import javax.sql.DataSource;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
-import com.sapient.controller.FetchInventoryServlet;
 import com.sapient.model.customer.NewCustomer;
 import com.sapient.model.order.Order;
 import com.sapient.model.order.OrderDetail;
@@ -304,16 +303,16 @@ public class BalloonDaoImpl implements BalloonDao {
 			ps.setString(7, customer.getZip());
 			ps.setString(8, customer.getEmail());
 			ps.setString(9, id);
-			
+
 			log.info(ps);
 			int success = ps.executeUpdate();
 
 			if (success != 0) {
 				log.info("Update customer successful");
-			}else{
+			} else {
 				log.info("Update customer failed");
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -321,8 +320,6 @@ public class BalloonDaoImpl implements BalloonDao {
 		}
 	}
 
-	
-	
 	private void closeConnections() {
 		try {
 			if (con != null && !con.isClosed()) {

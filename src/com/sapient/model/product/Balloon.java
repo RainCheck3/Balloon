@@ -68,7 +68,6 @@ public class Balloon implements Serializable {
 	public void setShape(String shape) {
 		this.shape = shape;
 	}
-
 	public String getDescription() {
 		return Description;
 	}
@@ -92,6 +91,7 @@ public class Balloon implements Serializable {
 	public void setReviews(String reviews) {
 		Reviews = reviews;
 	}
-	
-	
+	public String getID() {
+		return price + color + shape;
+	}
 }

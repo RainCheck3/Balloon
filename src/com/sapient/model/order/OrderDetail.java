@@ -10,18 +10,9 @@ import com.sapient.model.product.Balloon;
  */
 
 public class OrderDetail {
-	private int quantity;
 	private double taxStatus;
 	private Order order;
 	private Balloon balloon;
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 
 	public double getTaxStatus() {
 		return taxStatus;
@@ -48,6 +39,6 @@ public class OrderDetail {
 	}
 
 	public double calcSubTotal() {
-		return quantity * balloon.getPrice();
+		return balloon.getQuantity() * balloon.getPrice();
 	}
 }

@@ -19,8 +19,8 @@
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
 
-  
 
+	<%@include file="header.jsp" %>
 </head>
 
 <body>
@@ -69,7 +69,6 @@
                     <a href="#" class="list-group-item">Category 2</a>
                     <a href="#" class="list-group-item">Category 3</a>
                 </div>
-               
             </div>
 
             <div class="col-md-9">
@@ -134,7 +133,6 @@
                     </div>
 
                 </c:forEach>
-                
                 </div>
 
             </div>

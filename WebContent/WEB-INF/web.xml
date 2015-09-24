@@ -26,6 +26,15 @@
   </resource-ref>
   <servlet>
     <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.sapient.controller.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <display-name>UpdateCustomerServlet</display-name>
     <servlet-name>UpdateCustomerServlet</servlet-name>
     <servlet-class>com.sapient.controller.UpdateCustomerServlet</servlet-class>

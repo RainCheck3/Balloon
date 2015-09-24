@@ -1,50 +1,25 @@
 package com.sapient.controller;
 
 import java.io.IOException;
-import java.util.List;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
-
-import com.sapient.dao.BalloonDao;
 import com.sapient.dao.BalloonDaoImpl;
 
-import com.sapient.model.product.Balloon;
-
 /**
- * Servlet implementation class FetchInventoryServlet
+ * Servlet implementation class LoginServlet
  */
-public class FetchInventoryServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Logger log;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.servlet.GenericServlet#init(javax.servlet.ServletConfig)
-	 */
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		log = Logger.getLogger(FetchInventoryServlet.class.getName());
-		BasicConfigurator.configure();
-
-		BalloonDao balloonDao = new BalloonDaoImpl();
-
-		List<Balloon> inventory;
-		inventory = balloonDao.getInventory();
-		config.getServletContext().setAttribute("inv", inventory);
-	}
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public FetchInventoryServlet() {
+	public LoginServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -64,7 +39,23 @@ public class FetchInventoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		String username = request.getParameter("Username");
+		String password = request.getParameter("Password");
+
+		BalloonDaoImpl user = new BalloonDaoImpl();
+		boolean status = user.validateLogin(username, password);
+		HttpSession session = request.getSession();
+		session.setAttribute("username", username);
+		if (status) {
+			  request.getRequestDispatcher("index.jsp")
+					.forward(request, response);
+		}
+			else {
+			response.sendRedirect("html/Login.html");
+
+		}
+
 	}
 
 }

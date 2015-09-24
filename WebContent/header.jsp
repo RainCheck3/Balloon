@@ -17,7 +17,7 @@
                         <a href="MyAccount.jsp">My Account</a>
                     </li>
                     <li style="float:right">
-                        <a href="#">Login</a>
+                        <a href="./html/Login.html">Login</a>
                     </li>
                 </ul>
             </div>

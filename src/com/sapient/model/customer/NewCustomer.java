@@ -18,6 +18,7 @@ public class NewCustomer {
 	private String Country;
 	private String Email;
 	private String zip;
+	
 	public String getZip() {
 		return zip;
 	}

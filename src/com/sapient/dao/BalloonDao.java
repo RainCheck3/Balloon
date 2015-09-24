@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.sapient.model.customer.NewCustomer;
 import com.sapient.model.order.Order;
-import com.sapient.model.order.OrderDetail;
 import com.sapient.model.product.Balloon;
 
 public interface BalloonDao {

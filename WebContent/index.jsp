@@ -1,3 +1,5 @@
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,6 +74,9 @@
                     <a href="#" class="list-group-item">Category 2</a>
                     <a href="#" class="list-group-item">Category 3</a>
                 </div>
+                <c:forEach var="item" items="${applicationScope.inv}">
+					${item.price} ${item.color} ${item.shape} ${item.quantity} <br/>
+				</c:forEach>
             </div>
 
             <div class="col-md-9">

@@ -36,17 +36,18 @@ public class BalloonDaoImpl implements BalloonDao {
 
 	// Construct DAO, establish database connection
 	public BalloonDaoImpl() {
-		log = Logger.getLogger(FetchInventoryServlet.class.getName());
-    	BasicConfigurator.configure();
-		
+		log = Logger.getLogger(BalloonDaoImpl.class.getName());
+		BasicConfigurator.configure();
+
 		// Lookup for DataSource
 		try {
 			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/balloonDB");
+			DataSource ds = (DataSource) ctx
+					.lookup("java:comp/env/jdbc/balloonDB");
 
 			// Obtain a connection
 			con = ds.getConnection();
-			log.info("Connection success");
+			log.info("DBConnection success");
 
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
@@ -57,34 +58,83 @@ public class BalloonDaoImpl implements BalloonDao {
 		}
 	}
 
+	
+	// Query the database
 	@Override
 	public List<Balloon> getInventory() {
 		List<Balloon> result = new ArrayList<Balloon>();
 		
-		//Query the database
-		//ps = con.prepareStatement("SELECT * FROM PRODUCTS");
-		/*
-		ps.setString(1, username);
-		ps.setString(2, password);
-		
-		rs =ps.executeQuery();
-				
-		if (rs.next()) {
-			fname = rs.getString(1);
-			lname = rs.getString(2);
-			return true;
+		try {
+			ps = con.prepareStatement("SELECT * FROM PRODUCTS");
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Balloon currentBalloon = new Balloon();
+				currentBalloon.setPrice(rs.getDouble(2));
+				currentBalloon.setColor(rs.getString(3));
+				currentBalloon.setShape(rs.getString(4));
+				currentBalloon.setQuantity(rs.getInt(5));
+				result.add(currentBalloon);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//Close connections
+			try {
+				if (con != null && !con.isClosed()) {
+					con.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		return false;
-		*/
-		
-		
-		return null;
+
+		return result;
 	}
 
+	// Insert into database
 	@Override
 	public void addBalloon(Balloon balloon) {
-		// TODO Auto-generated method stub
+		double price = balloon.getPrice();
+		String color = balloon.getColor();
+		String shape = balloon.getShape();
+		int quantity = balloon.getQuantity();
+		String productID = price + color + shape;
 
+		try {
+			ps = con.prepareStatement("INSERT INTO PRODUCTS VALUES (?, ?, ?, ?, ?)");
+			ps.setString(1, productID);
+			ps.setDouble(2, price);
+			ps.setString(3, color);
+			ps.setString(4, shape);
+			ps.setInt(5, quantity);
+
+			int success = ps.executeUpdate();
+
+			if (success != 0) {
+				log.info("Insert successfull");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null && !con.isClosed()) {
+					con.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
@@ -92,6 +142,7 @@ public class BalloonDaoImpl implements BalloonDao {
 		// TODO Auto-generated method stub
 
 	}
+
 	@Override
 	public boolean validateLogin(String userName, String passWord) {
 		// TODO Auto-generated method stub

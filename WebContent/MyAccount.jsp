@@ -24,41 +24,41 @@
 		<div class="tab-content margin-bottom">
 			<div class="tab-pane active" id="tab1">
 				<h3 class="center-text">Edit Account</h3>
-				<form role="form">
+				<form name="updateCustomer" action="UpdateCustomerServlet"method="post">
 					<div class="form-group quarter-width">
 				    	<label for="fName">First Name:</label>
-						<input type="text" class="form-control account-input" id="fName">
+						<input type="text" class="form-control account-input" name="fName">
 					</div>
 					<div class="form-group quarter-width">
 				    	<label for="lName">Last Name:</label>
-						<input type="text" class="form-control account-input" id="lName">
+						<input type="text" class="form-control account-input" name="lName">
 					</div>
 					<div class="form-group quarter-width">
 				    	<label for="email">Email address:</label>
-						<input type="email" class="form-control account-input" id="email">
+						<input type="email" class="form-control account-input" name="email">
 					</div>
 					<div class="form-group quarter-width">
 						<label>Address</label>
 					</div>
 					<div class="form-group quarter-width">
 						<label for="street">Street:</label>
-						<input type="text" class="form-control account-input" id="street">
+						<input type="text" class="form-control account-input" name="street">
 					</div>
 					<div class="form-group quarter-width">
 						<label for="city">City:</label>
-						<input type="text" class="form-control account-input" id="city">
+						<input type="text" class="form-control account-input" name="city">
 					</div>
 					<div class="form-group quarter-width">
 						<label for="state">State:</label>
-						<input type="text" class="form-control account-input" id="state">
+						<input type="text" class="form-control account-input" name="state">
 					</div>
 					<div class="form-group quarter-width">
 						<label for="zip">Zip:</label>
-						<input type="text" class="form-control account-input" id="zip">
+						<input type="text" class="form-control account-input" name="zip">
 					</div>
 					<div class="form-group quarter-width">
 						<label for="country">Country:</label>
-						<input type="text" class="form-control account-input" id="country">
+						<input type="text" class="form-control account-input" name="country">
 					</div>
 					<div class="form-group quarter-width">
 						<button type="submit" class="btn btn-default account-input">Submit</button>		

@@ -288,6 +288,41 @@ public class BalloonDaoImpl implements BalloonDao {
 		}
 	}
 
+	public void updateUser(NewCustomer customer) {
+
+		try {
+			ps = con.prepareStatement("UPDATE CUSTOMER SET FIRSTNAME = ?, LASTNAME = ?, STREET = ?, "
+					+ "CITY = ?, STATE = ?, COUNTRY = ?, ZIP = ?, EMAIL = ? "
+					+ "WHERE CUSTOMERID = ?");
+			String id = "lightning";
+			ps.setString(1, customer.getFirstName());
+			ps.setString(2, customer.getLastName());
+			ps.setString(3, customer.getStreet());
+			ps.setString(4, customer.getCity());
+			ps.setString(5, customer.getState());
+			ps.setString(6, customer.getCountry());
+			ps.setString(7, customer.getZip());
+			ps.setString(8, customer.getEmail());
+			ps.setString(9, id);
+			
+			log.info(ps);
+			int success = ps.executeUpdate();
+
+			if (success != 0) {
+				log.info("Update customer successful");
+			}else{
+				log.info("Update customer failed");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConnections();
+		}
+	}
+
+	
+	
 	private void closeConnections() {
 		try {
 			if (con != null && !con.isClosed()) {

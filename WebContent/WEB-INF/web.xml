@@ -16,13 +16,22 @@
     <url-pattern>/fetch</url-pattern>
   </servlet-mapping>
   <resource-ref>
-  <res-ref-name>
+    <res-ref-name>
     jdbc/balloonDB
   </res-ref-name>
-  <res-type>
+    <res-type>
     javax.sql.DataSource
   </res-type>
-  <res-auth>Container</res-auth>
-</resource-ref>
-
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  <servlet>
+    <description></description>
+    <display-name>UpdateCustomerServlet</display-name>
+    <servlet-name>UpdateCustomerServlet</servlet-name>
+    <servlet-class>com.sapient.controller.UpdateCustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateCustomerServlet</servlet-name>
+    <url-pattern>/UpdateCustomerServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

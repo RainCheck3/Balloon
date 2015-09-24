@@ -19,6 +19,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import com.sapient.controller.FetchInventoryServlet;
+import com.sapient.model.customer.NewCustomer;
 import com.sapient.model.order.Order;
 import com.sapient.model.product.Balloon;
 
@@ -50,20 +51,17 @@ public class BalloonDaoImpl implements BalloonDao {
 			log.info("DBConnection success");
 
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	
-	// Query the database
+	// Query the Products Table
 	@Override
 	public List<Balloon> getInventory() {
 		List<Balloon> result = new ArrayList<Balloon>();
-		
+
 		try {
 			ps = con.prepareStatement("SELECT * FROM PRODUCTS");
 			rs = ps.executeQuery();
@@ -79,26 +77,13 @@ public class BalloonDaoImpl implements BalloonDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			//Close connections
-			try {
-				if (con != null && !con.isClosed()) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			closeConnections();
 		}
 
 		return result;
 	}
 
-	// Insert into database
+	// Insert into Products Table
 	@Override
 	public void addBalloon(Balloon balloon) {
 		double price = balloon.getPrice();
@@ -118,22 +103,13 @@ public class BalloonDaoImpl implements BalloonDao {
 			int success = ps.executeUpdate();
 
 			if (success != 0) {
-				log.info("Insert successfull");
+				log.info("Insert into products successful");
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (con != null && !con.isClosed()) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			closeConnections();
 		}
 	}
 
@@ -143,10 +119,67 @@ public class BalloonDaoImpl implements BalloonDao {
 
 	}
 
+	//Query Customer Table
 	@Override
-	public boolean validateLogin(String userName, String passWord) {
-		// TODO Auto-generated method stub
+	public boolean validateLogin(String username, String password) {
+		String validPassword;
+		
+		try {
+			ps = con.prepareStatement("SELECT PASSWORD FROM CUSTOMER WHERE CUSTOMERID=?");
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				validPassword = rs.getString(1);
+				if (password.equals(validPassword)) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConnections();
+		}
 		return false;
 	}
 
+	// Insert into Customer Table
+	@Override
+	public void registerUser(NewCustomer newcustomer) {
+		
+		try {
+			ps = con.prepareStatement("INSERT INTO CUSTOMER(CUSTOMERID, FIRSTNAME, LASTNAME, PASSWORD) VALUES (?, ?, ?, ?)");
+			ps.setString(1, newcustomer.getUsername());
+			ps.setString(2, newcustomer.getFirstName());
+			ps.setString(3, newcustomer.getLastName());
+			ps.setString(4, newcustomer.getPassword());
+
+			int success = ps.executeUpdate();
+
+			if (success != 0) {
+				log.info("Insert into customer successful");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConnections();
+		}
+	}
+
+	private void closeConnections() {
+		try {
+			if (con != null && !con.isClosed()) {
+				con.close();
+			}
+			if (ps != null) {
+				ps.close();
+			}
+			if (rs != null) {
+				rs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

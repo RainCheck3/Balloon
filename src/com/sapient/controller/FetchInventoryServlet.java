@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.sapient.dao.BalloonDao;
 import com.sapient.dao.BalloonDaoImpl;
+import com.sapient.model.customer.NewCustomer;
 import com.sapient.model.product.Balloon;
 
 /**
@@ -32,15 +33,29 @@ public class FetchInventoryServlet extends HttpServlet {
 		BasicConfigurator.configure();
 		
 		BalloonDao balloonDao = new BalloonDaoImpl();
-		Balloon balloon = new Balloon(5,"Red", "Square", 20);
+		//Balloon balloon = new Balloon(5,"Red", "Square", 20);
 		//balloonDao.addBalloon(balloon);
+	
 		List<Balloon> inventory;
+		//inventory = balloonDao.getInventory();
+		//log.info(inventory.size());
+		/*
+		NewCustomer user = new NewCustomer();
+		user.setUsername("Rain");
+		user.setPassword("hunter2");
+		user.setFirstName("Jiaju");
+		user.setLastName("Xu");
+		balloonDao.registerUser(user);
+		*/
+		if(balloonDao.validateLogin("Rain", "hunter2")) {
+			log.info("login success");
+		}
+		else {
+			log.info("login failed");
+		}
 		
-		inventory = balloonDao.getInventory();
 		
-		log.info(inventory.size());
-		
-		config.getServletContext().setAttribute("inv", inventory);
+		//config.getServletContext().setAttribute("inv", inventory);
 	}
 	
 	

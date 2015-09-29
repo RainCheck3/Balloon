@@ -24,7 +24,7 @@
 		<div class="tab-content margin-bottom">
 			<div class="tab-pane active" id="tab1">
 				<h3 class="center-text">Edit Account</h3>
-				<form name="updateCustomer" action="UpdateCustomerServlet"method="post">
+				<form name="updateCustomer" action="UpdateCustomerServlet" method="post">
 					<div class="form-group quarter-width">
 				    	<label for="fName">First Name:</label>
 						<input type="text" class="form-control account-input" name="fName">
@@ -69,9 +69,9 @@
 				<h3 class="center-text">Orders</h3>
 			</div>
 		</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
+    <script src="js/ajax.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

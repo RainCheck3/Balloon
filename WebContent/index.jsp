@@ -24,7 +24,16 @@
 </head>
 
 <body>
-
+	<script>
+	var location = window.location;
+	if(location.search("balloon/login.html") == -1)
+		{
+		
+		}
+	alert(window.location);
+	var s = "foo";
+	alert(s.indexOf("oo") > -1);
+	</script>
     <!-- Page Content -->
     <div class="container">
 

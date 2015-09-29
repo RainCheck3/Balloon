@@ -47,6 +47,7 @@ public class LoginServlet extends HttpServlet {
 		boolean status = user.validateLogin(username, password);
 		HttpSession session = request.getSession();
 		session.setAttribute("username", username);
+		session.setAttribute("loggedin", 1);
 		if (status) {
 			  request.getRequestDispatcher("index.jsp")
 					.forward(request, response);

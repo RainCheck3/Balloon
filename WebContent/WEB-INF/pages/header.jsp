@@ -14,13 +14,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li style="float:right">
-                        <a href="/Balloon/acnt">My Account</a>
+                        <a href="MyAccount.jsp">My Account</a>
                     </li>
                     <li style="float:right">
-                        <a href="/Balloon/login">Login</a>
+                        <a href="./html/Login.html">Login</a>
                     </li>
                     <li style="float:right">
-                        <a href="/Balloon/checkout">Checkout</a>
+                        <a href="Checkout.jsp">Checkout</a>
                     </li>
                 </ul>
             </div>

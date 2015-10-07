@@ -103,19 +103,7 @@ public class BalloonDaoImpl implements BalloonDao {
 			e.printStackTrace();
 		} finally {
 			//Close connections
-			try {
-				if (con != null && !con.isClosed()) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			closeConnections();
 		}
 		return desc;
 	}
@@ -284,7 +272,7 @@ public class BalloonDaoImpl implements BalloonDao {
 	public boolean validateLogin(String userName, String passWord) {
 	
 		try {
-			ps = con.prepareStatement("SELECT * FROM USERS WHERE USERID=? AND PASSWD=?");
+			ps = con.prepareStatement("SELECT * FROM CUSTOMER WHERE CUSTOMERID=? AND PASSWORD=?");
 			ps.setString(1, userName);
 			ps.setString(2, passWord);
 			rs = ps.executeQuery();
@@ -296,19 +284,7 @@ public class BalloonDaoImpl implements BalloonDao {
 			e.printStackTrace();
 		} finally {
 			//Close connections
-			try {
-				if (con != null && !con.isClosed()) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			closeConnections();
 		}
 		return false;
 	}

@@ -9,7 +9,6 @@ import javax.ws.rs.core.MediaType;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
-import com.sapient.controller.FetchInventoryServlet;
 import com.sapient.dao.BalloonDao;
 import com.sapient.dao.BalloonDaoImpl;
 import com.sapient.model.customer.NewCustomer;
@@ -23,11 +22,8 @@ public class DataService {
 	public String updateAccount(@ FormParam("fName") String fName, @FormParam("lName") String lName, 
 			@FormParam("email") String email, @FormParam("street") String street, @FormParam("city") String city, 
 			@FormParam("state") String state, @FormParam("zip") String zip, @FormParam("country") String country) {
-		log = Logger.getLogger(FetchInventoryServlet.class.getName());
 		BasicConfigurator.configure();
 		NewCustomer customer = new NewCustomer();
-		log.info("first name: " + fName);
-		log.info("last name: " + lName);
 		customer.setCity(city);
 		customer.setCountry(country);
 		customer.setEmail(email);

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sapient.dao.BalloonDaoImpl;
+import com.sapient.model.order.Order;
 
 /**
  * Servlet implementation class LoginServlet
@@ -45,14 +46,17 @@ public class LoginServlet extends HttpServlet {
 
 		BalloonDaoImpl user = new BalloonDaoImpl();
 		boolean status = user.validateLogin(username, password);
-		HttpSession session = request.getSession();
-		session.setAttribute("username", username);
-		session.setAttribute("loggedin", 1);
+
 		if (status) {
-			  request.getRequestDispatcher("index.jsp")
+			HttpSession session = request.getSession();
+			Order order = new Order();
+			
+			session.setAttribute("order", order);
+			session.setAttribute("username", username);
+			
+			request.getRequestDispatcher("index.jsp")
 					.forward(request, response);
-		}
-			else {
+		} else {
 			response.sendRedirect("html/Login.html");
 
 		}

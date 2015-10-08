@@ -26,7 +26,7 @@ public class UpdateCustomerServlet extends HttpServlet {
      */
     public UpdateCustomerServlet() {
         super();
-		log = Logger.getLogger(FetchInventoryServlet.class.getName());
+		log = Logger.getLogger(UpdateCustomerServlet.class.getName());
 		BasicConfigurator.configure();
         // TODO Auto-generated constructor stub
     }

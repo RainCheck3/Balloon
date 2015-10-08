@@ -103,19 +103,7 @@ public class BalloonDaoImpl implements BalloonDao {
 			e.printStackTrace();
 		} finally {
 			//Close connections
-			try {
-				if (con != null && !con.isClosed()) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			closeConnections();
 		}
 		return desc;
 	}
@@ -296,19 +284,7 @@ public class BalloonDaoImpl implements BalloonDao {
 			e.printStackTrace();
 		} finally {
 			//Close connections
-			try {
-				if (con != null && !con.isClosed()) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			closeConnections();
 		}
 		return false;
 	}

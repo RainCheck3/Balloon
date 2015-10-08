@@ -33,6 +33,10 @@ public class NavigationCtrl {
 		return "MyAccount";
 	}
 	
+	@RequestMapping(value = "/acnt", method = RequestMethod.POST)
+	public String updateAccount() {
+		return "MyAccount";
+	}
 	
 	
 }

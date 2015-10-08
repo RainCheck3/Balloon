@@ -33,7 +33,7 @@ public class DataService {
 		customer.setStreet(street);
 		customer.setZip(zip);
 		BalloonDao updateDB = new BalloonDaoImpl();
-		updateDB.updateUser(customer);
+		updateDB.updateUser(customer,10);
 //		request.getSession().setAttribute("name", fName);
 		return fName + " " + lName;
 	}

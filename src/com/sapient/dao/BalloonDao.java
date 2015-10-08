@@ -14,5 +14,5 @@ public interface BalloonDao {
 	public boolean validateLogin(String userName, String passWord);
 	public String getDescription( String productid);
 	public void registerUser(NewCustomer newcustomer);
-	public void updateUser(NewCustomer customer);
+	public void updateUser(NewCustomer customer,Integer customerId);
 }

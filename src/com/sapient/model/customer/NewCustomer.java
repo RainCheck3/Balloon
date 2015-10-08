@@ -1,24 +1,66 @@
 package com.sapient.model.customer;
 
-import com.sapient.model.order.Order;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+//import com.sapient.model.order.Order;
 
 /**
  * 
- * @author jxu1 This class represents a customer name, address, and order, along
+ * @author jxu1/vinay This class represents a customer name, address, and order, along
  *         with getter and setter methods for each
  */
+
+@Entity
+@Table(name = "CUSTOMER")
 public class NewCustomer {
+	
+	
+	@Id @GeneratedValue
+    @Column(name = "CUSTOMERID")
+	private Integer customerId;
+	
+	@Column(name = "USERNAME")
 	private String username;
+	
+	@Column(name = "PASSWORD")
 	private String password;
+	
+	@Column(name = "FIRSTNAME")
 	private String firstName;
+	
+	@Column(name = "LASTNAME")
 	private String lastName;
+	
+	@Column(name = "STREET")
 	private String street;
+	
+	@Column(name = "CITY")
 	private String city;
+	
+	@Column(name = "STATE")
 	private String state;
+	
+	@Column(name = "COUNTRY")
 	private String Country;
+	
+	@Column(name = "EMAIL")
 	private String Email;
+	
+	@Column(name = "ZIP")
 	private String zip;
 	
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
 	public String getZip() {
 		return zip;
 	}
@@ -27,17 +69,13 @@ public class NewCustomer {
 		this.zip = zip;
 	}
 
-	private Order order;
+	//private Order order;
 
 	public String getFirstName() {
 		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
-		if (firstName.length() < 2) {
-			throw new IllegalArgumentException(
-					"Invalid name entered, length needs to be greater than 1");
-		}
 		this.firstName = firstName;
 	}
 
@@ -46,10 +84,6 @@ public class NewCustomer {
 	}
 
 	public void setLastName(String lastName) {
-		if (lastName.length() < 2) {
-			throw new IllegalArgumentException(
-					"Invalid name entered, length needs to be greater than 1");
-		}
 		this.lastName = lastName;
 	}
 
@@ -109,7 +143,7 @@ public class NewCustomer {
 		Email = email;
 	}
 
-	public Order getOrder() {
+	/*public Order getOrder() {
 		return order;
 	}
 
@@ -118,6 +152,6 @@ public class NewCustomer {
 			throw new IllegalArgumentException("Null order object");
 		} else {
 			this.order = order;
-		}
-	}
+		}*/
+	//}
 }

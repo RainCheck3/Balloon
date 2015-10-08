@@ -57,7 +57,7 @@ public class UpdateCustomerServlet extends HttpServlet {
 		customer.setStreet(request.getParameter("street"));
 		customer.setZip(request.getParameter("zip"));
 		BalloonDao updateDB = new BalloonDaoImpl();
-		updateDB.updateUser(customer);
+		updateDB.updateUser(customer,10);
 		request.getSession().setAttribute("name", fName);
 		request.getRequestDispatcher("MyAccount.jsp").forward(request, response);
 	}

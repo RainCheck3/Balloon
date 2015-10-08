@@ -8,19 +8,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.jsp">Shopping Portal</a>
+                <a class="navbar-brand" href="/Balloon/home">Shopping Portal</a>
             </div>
            
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li style="float:right">
-                        <a href="MyAccount.jsp">My Account</a>
+                        <a href="/Balloon/acnt">My Account</a>
                     </li>
                     <li style="float:right">
-                        <a href="./html/Login.html">Login</a>
+                        <a href="/Balloon/login">Login</a>
                     </li>
                     <li style="float:right">
-                        <a href="Checkout.jsp">Checkout</a>
+                        <a href="/Balloon/checkout">Checkout</a>
                     </li>
                 </ul>
             </div>

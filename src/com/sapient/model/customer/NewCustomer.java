@@ -52,8 +52,6 @@ public class NewCustomer {
 	
 	@Column(name = "ZIP")
 	private String zip;
-
-
 	
 	public Integer getCustomerId() {
 		return customerId;

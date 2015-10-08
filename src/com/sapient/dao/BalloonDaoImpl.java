@@ -63,7 +63,7 @@ public class BalloonDaoImpl implements BalloonDao {
 		Query qry = session.createQuery(hql);
 	    List lst = qry.list();
 		session.close();
-		String desc;
+		String desc="";
 		for(Iterator it=lst.iterator();it.hasNext();){
 			
 		    balloon = (Balloon)it.next();
@@ -98,112 +98,112 @@ public class BalloonDaoImpl implements BalloonDao {
 		}
 	}
 
-	// Insert into Order, OrderDetails Table, update products
-	@Override
-	public void placeOrder(Order order) {
-		int orderID = order.hashCode();
-		String customerID = order.getCustomer().getUsername();
-		int orderDetailID;
-		String productID;
-		double price;
-		int quantity;
-		double total;
-		boolean inStock = true;
-		int success;
-
-		// Iterate through all orderDetails, check if in stock
-		for (OrderDetail orderDetail : order.getOrderDetail()) {
-			productID = orderDetail.getBalloon().getID();
-			quantity = orderDetail.getBalloon().getQuantity();
-			// Check if product has enough stock
-			try {
-				ps = con.prepareStatement("SELECT QUANTITY FROM PRODUCTS WHERE PRODUCTID=?");
-				ps.setString(1, productID);
-				rs = ps.executeQuery();
-
-				if (rs.next()) {
-					if (rs.getInt(1) < quantity) {
-						// Not enough in stock
-						inStock = false;
-						break;
-					}
-				} else {
-					inStock = false;
-					break;
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-
-		if (inStock) {
-			try {
-				// Insert into order table
-				ps = con.prepareStatement("INSERT INTO ORDERZ VALUES (?, ?)");
-				ps.setInt(1, orderID);
-				ps.setString(2, customerID);
-
-				success = ps.executeUpdate();
-
-				if (success != 0) {
-					log.info("Insert into order successful");
-				}
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			// Iterate through all orderDetails, insert into orderDetails table
-			for (OrderDetail orderDetail : order.getOrderDetail()) {
-				orderDetailID = orderDetail.hashCode();
-				productID = orderDetail.getBalloon().getID();
-				price = orderDetail.getBalloon().getPrice();
-				quantity = orderDetail.getBalloon().getQuantity();
-				total = orderDetail.calcSubTotal();
-
-				try {
-					// Insert into orderDetails table
-					ps = con.prepareStatement("INSERT INTO ORDERDETAILS VALUES (?, ?, ?, ?, ?, ?)");
-					ps.setInt(1, orderDetailID);
-					ps.setInt(2, orderID);
-					ps.setString(3, productID);
-					ps.setDouble(4, price);
-					ps.setInt(5, quantity);
-					ps.setDouble(6, total);
-
-					success = ps.executeUpdate();
-
-					if (success != 0) {
-						log.info("Insert into orderDetail successful");
-					}
-
-					// Update product table
-					ps = con.prepareStatement("SELECT QUANTITY FROM PRODUCTS WHERE PRODUCTID=?");
-					ps.setString(1, productID);
-					rs = ps.executeQuery();
-
-					if (rs.next()) {
-						// Update product count
-						int currentQuantity = rs.getInt(1);
-						ps = con.prepareStatement("UPDATE PRODUCTS SET QUANTITY=? WHERE PRODUCTID=?");
-						ps.setInt(1, currentQuantity - quantity);
-						ps.setString(2, productID);
-						success = ps.executeUpdate();
-						if (success != 0) {
-							log.info("Update removal count of product successful");
-						}
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		closeConnections();
-	}
+//	// Insert into Order, OrderDetails Table, update products
+//	@Override
+//	public void placeOrder(Order order) {
+//		int orderID = order.hashCode();
+//		String customerID = order.getCustomer().getUsername();
+//		int orderDetailID;
+//		String productID;
+//		double price;
+//		int quantity;
+//		double total;
+//		boolean inStock = true;
+//		int success;
+//
+//		// Iterate through all orderDetails, check if in stock
+//		for (OrderDetail orderDetail : order.getOrderDetail()) {
+//			productID = orderDetail.getBalloon().getID();
+//			quantity = orderDetail.getBalloon().getQuantity();
+//			// Check if product has enough stock
+//			try {
+//				ps = con.prepareStatement("SELECT QUANTITY FROM PRODUCTS WHERE PRODUCTID=?");
+//				ps.setString(1, productID);
+//				rs = ps.executeQuery();
+//
+//				if (rs.next()) {
+//					if (rs.getInt(1) < quantity) {
+//						// Not enough in stock
+//						inStock = false;
+//						break;
+//					}
+//				} else {
+//					inStock = false;
+//					break;
+//				}
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//		}
+//
+//		if (inStock) {
+//			try {
+//				// Insert into order table
+//				ps = con.prepareStatement("INSERT INTO ORDERZ VALUES (?, ?)");
+//				ps.setInt(1, orderID);
+//				ps.setString(2, customerID);
+//
+//				success = ps.executeUpdate();
+//
+//				if (success != 0) {
+//					log.info("Insert into order successful");
+//				}
+//
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//			// Iterate through all orderDetails, insert into orderDetails table
+//			for (OrderDetail orderDetail : order.getOrderDetail()) {
+//				orderDetailID = orderDetail.hashCode();
+//				productID = orderDetail.getBalloon().getID();
+//				price = orderDetail.getBalloon().getPrice();
+//				quantity = orderDetail.getBalloon().getQuantity();
+//				total = orderDetail.calcSubTotal();
+//
+//				try {
+//					// Insert into orderDetails table
+//					ps = con.prepareStatement("INSERT INTO ORDERDETAILS VALUES (?, ?, ?, ?, ?, ?)");
+//					ps.setInt(1, orderDetailID);
+//					ps.setInt(2, orderID);
+//					ps.setString(3, productID);
+//					ps.setDouble(4, price);
+//					ps.setInt(5, quantity);
+//					ps.setDouble(6, total);
+//
+//					success = ps.executeUpdate();
+//
+//					if (success != 0) {
+//						log.info("Insert into orderDetail successful");
+//					}
+//
+//					// Update product table
+//					ps = con.prepareStatement("SELECT QUANTITY FROM PRODUCTS WHERE PRODUCTID=?");
+//					ps.setString(1, productID);
+//					rs = ps.executeQuery();
+//
+//					if (rs.next()) {
+//						// Update product count
+//						int currentQuantity = rs.getInt(1);
+//						ps = con.prepareStatement("UPDATE PRODUCTS SET QUANTITY=? WHERE PRODUCTID=?");
+//						ps.setInt(1, currentQuantity - quantity);
+//						ps.setString(2, productID);
+//						success = ps.executeUpdate();
+//						if (success != 0) {
+//							log.info("Update removal count of product successful");
+//						}
+//					}
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		closeConnections();
+//	}
 
 	// Insert into Customer Table
 	@Override
@@ -220,6 +220,7 @@ public class BalloonDaoImpl implements BalloonDao {
 		query.setParameter(0, userName);
 		query.setParameter(1, passWord);
 		List list = query.list();
+		
 		
 		if((list!=null)&&(list.size()>0)){
 			userStatus = true;
@@ -283,6 +284,13 @@ public class BalloonDaoImpl implements BalloonDao {
 			}
 		}
 
+	}
+
+
+	@Override
+	public boolean placeOrder(Order order) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	

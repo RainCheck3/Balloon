@@ -284,7 +284,7 @@ public class BalloonDaoImpl implements BalloonDao {
 	public boolean validateLogin(String userName, String passWord) {
 	
 		try {
-			ps = con.prepareStatement("SELECT * FROM USERS WHERE USERID=? AND PASSWD=?");
+			ps = con.prepareStatement("SELECT * FROM CUSTOMER WHERE CUSTOMERID=? AND PASSWORD=?");
 			ps.setString(1, userName);
 			ps.setString(2, passWord);
 			rs = ps.executeQuery();

@@ -22,6 +22,9 @@
                     <li style="float:right">
                         <a href="Checkout.jsp">Checkout</a>
                     </li>
+                    <li id="hello" style="float:right">
+                    	
+                    </li>
                 </ul>
             </div>
            

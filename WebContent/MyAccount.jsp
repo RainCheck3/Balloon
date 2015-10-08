@@ -24,7 +24,7 @@
 		<div class="tab-content margin-bottom">
 			<div class="tab-pane active" id="tab1">
 				<h3 class="center-text">Edit Account</h3>
-				<form name="updateCustomer" action="UpdateCustomerServlet" method="post">
+				<form name="updateCustomer">
 					<div class="form-group quarter-width">
 				    	<label for="fName">First Name:</label>
 						<input type="text" class="form-control account-input" name="fName">
@@ -61,9 +61,10 @@
 						<input type="text" class="form-control account-input" name="country">
 					</div>
 					<div class="form-group quarter-width">
-						<button type="submit" class="btn btn-default account-input">Submit</button>		
+						<button type="submit" class="btn btn-default account-input" id="updateBtn">Submit</button>		
 					</div>
 				</form>
+				<div class="form-group quarter-width" id="updateResponse"></div>
 			</div>
 			<div class="tab-pane" id="tab2">
 				<h3 class="center-text">Orders</h3>

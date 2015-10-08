@@ -79,6 +79,7 @@
 				</div>
 
 				<div class="row">
+				${description} ${color} ${shape}
 
 					<c:forEach var="item" items="${applicationScope.inv}">
 						<form method="post" action="rest/cart/add">

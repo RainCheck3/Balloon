@@ -1,25 +1,41 @@
 package com.sapient.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.sapient.dao.BalloonDaoImpl;
+import com.sapient.model.customer.LoginBean;
+import com.sapient.model.customer.NewCustomer;
+import com.sapient.model.product.Balloon;
 
 
 @Controller
 public class NavigationCtrl {
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String homePage() {
+	public String homePage(ModelMap model) {
+		BalloonDaoImpl balloonDao = new BalloonDaoImpl();
+		List<Balloon> lst = balloonDao.getInventory();
+		
+		
+		
+		
 		return "index";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage() {
+	@RequestMapping(value = "/login", method = RequestMethod.GET )
+	public String loginPage(ModelMap model) {
+		model.addAttribute("command", new LoginBean());
 		return "Login";
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public String signup() {
+	public String signupPage(ModelMap model) {
+		model.addAttribute("command", new NewCustomer());
 		return "Signup";
 	}
 	

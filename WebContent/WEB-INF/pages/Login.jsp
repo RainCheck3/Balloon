@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <title>Login Page</title>
-<link rel="stylesheet" type="text/css" href="../css/loginStyle.css" />
+<link rel="stylesheet" type="text/css" href="css/loginStyle.css" />
+<%@include file="header.jsp" %>
 </head>
 <body>
 <div id="login">

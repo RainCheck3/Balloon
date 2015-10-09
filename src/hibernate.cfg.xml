@@ -23,6 +23,7 @@
 
 <mapping class="com.sapient.model.product.Balloon" />
 <mapping class="com.sapient.model.customer.NewCustomer" />
+<mapping class="com.sapient.model.customer.UpdateCustomer" />
 <mapping class="com.sapient.model.customer.LoginBean"/>
 
  

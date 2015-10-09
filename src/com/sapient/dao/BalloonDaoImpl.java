@@ -4,17 +4,18 @@
 package com.sapient.dao;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -24,7 +25,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
 import com.sapient.model.customer.NewCustomer;
+import com.sapient.model.customer.UpdateCustomer;
 import com.sapient.model.order.Order;
 import com.sapient.model.order.OrderDetail;
 import com.sapient.model.product.Balloon;
@@ -32,9 +35,10 @@ import com.sapient.model.product.Balloon;
 public class BalloonDaoImpl implements BalloonDao {
 	Logger log;
 	
-
+	
 	// Construct DAO, establish database connection
 	public BalloonDaoImpl() {
+		
 	}
 
 
@@ -100,7 +104,9 @@ public class BalloonDaoImpl implements BalloonDao {
 
 //	// Insert into Order, OrderDetails Table, update products
 //	@Override
-//	public void placeOrder(Order order) {
+	public boolean placeOrder(Order order) {
+		return false;
+	}
 //		int orderID = order.hashCode();
 //		String customerID = order.getCustomer().getUsername();
 //		int orderDetailID;
@@ -253,24 +259,21 @@ public class BalloonDaoImpl implements BalloonDao {
 		}
 	}
 
-	public void updateUser(NewCustomer customer,Integer customerId) {
-
+	public void updateUser(UpdateCustomer customer,int customerId) {
 		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
 		Session session = sessionfactory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-		    NewCustomer newcustomer=(NewCustomer) session.get(NewCustomer.class,customerId);
-		    newcustomer.setCity(customer.getCity());
-		    newcustomer.setCountry(customer.getCountry());
-		    newcustomer.setEmail(customer.getEmail());
-		    newcustomer.setFirstName(customer.getFirstName());
-		    newcustomer.setLastName(customer.getLastName());
-		    newcustomer.setPassword(customer.getPassword());
-		    newcustomer.setState(customer.getState());
-		    newcustomer.setStreet(customer.getStreet());
-		    newcustomer.setZip(customer.getZip());
-		    newcustomer.setUsername(customer.getUsername());
+		    UpdateCustomer updateCustomer=(UpdateCustomer) session.get(UpdateCustomer.class,customerId);
+		    updateCustomer.setCity(customer.getCity());
+		    updateCustomer.setCountry(customer.getCountry());
+		    updateCustomer.setEmail(customer.getEmail());
+		    updateCustomer.setFirstName(customer.getFirstName());
+		    updateCustomer.setLastName(customer.getLastName());
+		    updateCustomer.setState(customer.getState());
+		    updateCustomer.setStreet(customer.getStreet());
+		    updateCustomer.setZip(customer.getZip());
 		    
 		    tx.commit();
 
@@ -284,16 +287,38 @@ public class BalloonDaoImpl implements BalloonDao {
 				session.close();
 			}
 		}
-
 	}
-
-
-	@Override
-	public boolean placeOrder(Order order) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	
+	public UpdateCustomer getUser(int customerId) {
+		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
+		Session session = sessionfactory.openSession();
+		Transaction tx = null;
+		UpdateCustomer updateCustomer = null;
+		try {
+			tx = session.beginTransaction();
+		    updateCustomer=(UpdateCustomer) session.get(UpdateCustomer.class,customerId);		    
+		    tx.commit();
+		} catch (HibernateException ex) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return updateCustomer;
+	}
+
+	public int getCustomerId(String un) {
+		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
+		Session session = sessionfactory.openSession();
+		String HQL_QUERY = "select user.customerId from NewCustomer as user where user.username=?";
+		Query query = session.createQuery(HQL_QUERY);
+		query.setParameter(0, un);
+		return (Integer) query.uniqueResult();
+	}
+
 	
 }

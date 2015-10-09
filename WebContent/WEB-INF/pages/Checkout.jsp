@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div class="row">
-		<c:forEach var="item" items="${requestScope.cart.orderDetails}">
+		<c:forEach var="item" items="${applicationScope.cart.orderDetails}">
 			<form method="post" action="rest/cart/add">
 
 				<div class="col-sm-4 col-lg-4 col-md-4">
@@ -24,11 +24,12 @@
 						<div class="caption">
 							<h4 class="pull-right">$${item.subTotal}</h4>
 							<h4>
-								<a href="Product.jsp?name=${item.balloon.productId}?price=${item.balloon.price}">${item.balloon.color}
+								<a
+									href="Product.jsp?name=${item.balloon.productId}?price=${item.balloon.price}">${item.balloon.color}
 									Balloon</a>
 							</h4>
 							<p>Shape : ${item.balloon.shape}</p>
-							<p>Balloons left : ${item.balloon.quantity}
+							<p>Quantity : ${item.balloon.quantity}
 						</div>
 						<div class="ratings">
 							<p class="pull-right">15 reviews</p>
@@ -40,12 +41,13 @@
 							</p>
 
 						</div>
-						<input style="margin-left: 63%; margin-bottom: 2%;" type="submit"
-							id="addbtn" value="Add to Cart" />
 					</div>
 				</div>
 			</form>
 		</c:forEach>
+		<form action="/Balloon/buy" method="POST">
+			<input type="submit" value="Buy">
+		</form>
 	</div>
 	<div class="container"></div>
 	<!-- jQuery -->

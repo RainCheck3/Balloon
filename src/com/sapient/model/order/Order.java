@@ -74,11 +74,11 @@ public class Order implements Serializable{
 		}
 	}
 
-	public List<OrderDetail> getOrderDetail() {
+	public List<OrderDetail> getOrderDetails() {
 		return orderDetails;
 	}
 
-	public void setOrderDetail(List<OrderDetail> orderDetails) {
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		if (orderDetails == null) {
 			throw new IllegalArgumentException();
 		} else {

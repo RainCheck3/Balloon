@@ -79,18 +79,22 @@
 				</div>
 
 				<div class="row">
+				${description} ${color} ${shape}
 
 					<c:forEach var="item" items="${applicationScope.inv}">
-						<form:form commandName="orderD" method="post"
+						<form:form method="post" commandName="orderD"
 							action="/Balloon/addcart">
 							<form:hidden path="price" value="${item.price}"></form:hidden>
-							<form:hidden path="quantity" value="${item.quantity}"></form:hidden>
-
+							<form:hidden path="quantity" value="${item.quantity}"></form:hidden> 
+							<form:hidden path="productId" value="${item.productId}"></form:hidden>
+							<form:hidden path="color" value="${item.color}"></form:hidden> 
+							<form:hidden path="shape" value="${item.shape}"></form:hidden>
+						
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
 									<div class="caption">
-										<h4 class="pull-right">${item.price}</h4>
+										<h4 class="pull-right">$${item.price}</h4>
 										<h4>
 											<a
 												href="Product.jsp?name=${item.productId}?price=${item.price}">${item.color}

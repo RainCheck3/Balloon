@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,28 +14,24 @@
 		<h1>
 			<strong>Welcome.</strong> Please login.
 		</h1>
-		<form action="../Login" method="post">
-			<fieldset>
-				<p>
-					<input type="text" required value="Username" name="Username"
-						onBlur="if(this.value=='')this.value='Username'"
-						onFocus="if(this.value=='Username')this.value='' ">
-				</p>
-				<p>
-					<input type="password" required value="Password" name="Password"
-					
-						onBlur="if(this.value=='')this.value='Password'"
-						onFocus="if(this.value=='Password')this.value='' ">
-				</p>
-				<p>
-					<a href="#">Forgot Password?</a>
-				</p>
-				<p>
-					<input type="submit" value="Login">
-				</p>
-				
-			</fieldset>
-		</form>
+		<form:form method="POST" action="/Balloon/newcustomer/log">
+		<table>
+			<tr>
+				<td>Customer Name :</td>
+				<td><form:input path="username" /></td>
+				<td><form:errors path="username" cssClass="errMsg"></form:errors></td>
+			</tr>
+			<tr>
+				<td>Password :</td>
+				<td><form:password path="password" /></td>
+				<td><form:errors path="password"  cssClass="errMsg"></form:errors></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Submit" />
+			</tr>
+		</table>
+	</form:form>
+		
 		
 	
 		

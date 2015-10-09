@@ -20,7 +20,7 @@
                         <a href="/Balloon/login">Login</a>
                     </li>
                     <li style="float:right">
-                        <a href="/Balloon/checkout">Checkout</a>
+                        <a href="/Balloon/cart">Checkout</a>
                     </li>
                 </ul>
             </div>

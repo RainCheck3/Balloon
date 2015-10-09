@@ -5,33 +5,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-//import com.sapient.model.order.Order;
-
-/**
- * 
- * @author jxu1/vinay This class represents a customer name, address, and order, along
- *         with getter and setter methods for each
- */
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "CUSTOMER")
-public class NewCustomer {
-	
+public class UpdateCustomer {
+
 	@Id @GeneratedValue
     @Column(name = "CUSTOMERID")
-	private Integer customerId;
-	
+	@NotNull
+	private int customerId;
+
 	@Column(name = "USERNAME")
-	private String username;
-	
-	@Column(name = "PASSWORD")
-	private String password;
-	
+	@NotEmpty
+	private String userName;	
+
 	@Column(name = "FIRSTNAME")
+	@NotEmpty
 	private String firstName;
-	
+
 	@Column(name = "LASTNAME")
+	@NotEmpty
 	private String lastName;
 	
 	@Column(name = "STREET")
@@ -44,19 +41,21 @@ public class NewCustomer {
 	private String state;
 	
 	@Column(name = "COUNTRY")
-	private String Country;
-	
+	private String country;
+
 	@Column(name = "EMAIL")
-	private String Email;
+	@NotEmpty
+	@org.hibernate.validator.constraints.Email
+	private String email;
 	
 	@Column(name = "ZIP")
 	private String zip;
 	
-	public Integer getCustomerId() {
+	public int getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Integer customerId) {
+	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
 
@@ -86,22 +85,6 @@ public class NewCustomer {
 		this.lastName = lastName;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username.toLowerCase();
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getStreet() {
 		return street;
 	}
@@ -127,30 +110,28 @@ public class NewCustomer {
 	}
 
 	public String getCountry() {
-		return Country;
+		return country;
 	}
 
 	public void setCountry(String country) {
-		Country = country;
+		this.country = country;
 	}
 
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
+	}
+		
+	public String getUserName() {
+		return userName;
 	}
 
-	/*public Order getOrder() {
-		return order;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public void setOrder(Order order) {
-		if (order == null) {
-			throw new IllegalArgumentException("Null order object");
-		} else {
-			this.order = order;
-		}*/
-	//}
 }
+

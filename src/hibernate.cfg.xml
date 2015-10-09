@@ -10,7 +10,7 @@
 <!-- Related to the connection START -->
 <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver </property>
 <property name="connection.url">jdbc:oracle:thin:@deltahiti31202:1521:xe </property>
-<property name="connection.user">jiaju </property>
+<property name="connection.user">Jiaju</property>
 <property name="connection.password">hunter2</property>
 <!-- Related to the connection END -->
  
@@ -23,6 +23,8 @@
 
 <mapping class="com.sapient.model.product.Balloon" />
 <mapping class="com.sapient.model.customer.NewCustomer" />
+<mapping class="com.sapient.model.customer.UpdateCustomer" />
+<mapping class="com.sapient.model.customer.LoginBean"/>
 
  
 </session-factory>

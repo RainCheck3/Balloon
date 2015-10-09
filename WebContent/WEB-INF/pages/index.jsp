@@ -54,15 +54,15 @@
 							</ol>
 							<div class="carousel-inner">
 								<div class="item active">
-									<img class="slide-image" src="http://placehold.it/800x300"
+									<img class="slide-image" src="https://tracilee.files.wordpress.com/2011/10/dsc_0334_21.jpg"
 										alt="">
 								</div>
 								<div class="item">
-									<img class="slide-image" src="http://placehold.it/800x300"
+									<img class="slide-image" src="http://vrf.wpengine.netdna-cdn.com/wp-content/uploads/2014/03/balloons-06.jpg"
 										alt="">
 								</div>
 								<div class="item">
-									<img class="slide-image" src="http://placehold.it/800x300"
+									<img class="slide-image" src="http://images6.alphacoders.com/459/459891.jpg"
 										alt="">
 								</div>
 							</div>
@@ -92,7 +92,7 @@
 						
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
+									<img src="http://images.clipartpanda.com/hot-air-balloon-border-clip-art-balloon-20clipart-eaTep57i4.png" alt="">
 									<div class="caption">
 										<h4 class="pull-right">$${item.price}</h4>
 										<h4>

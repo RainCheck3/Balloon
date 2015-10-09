@@ -47,6 +47,7 @@ public class NavigationCtrl {
 		log = Logger.getLogger(NavigationCtrl.class.getName());
 		BasicConfigurator.configure();
 		BalloonDao dao = new BalloonDaoImpl();
+		log.info(session.getAttribute("username"));
 		int customerId = (Integer)dao.getCustomerId("Gunther");
 		UpdateCustomer customer = dao.getUser(customerId);
 		model.addAttribute("customer", customer);

@@ -1,5 +1,5 @@
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,13 +81,16 @@
 				<div class="row">
 
 					<c:forEach var="item" items="${applicationScope.inv}">
-						<form method="post" action="rest/cart/add">
+						<form:form commandName="orderD" method="post"
+							action="/Balloon/addcart">
+							<form:hidden path="price" value="${item.price}"></form:hidden>
+							<form:hidden path="quantity" value="${item.quantity}"></form:hidden>
 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
 									<div class="caption">
-										<h4 class="pull-right">$${item.price}</h4>
+										<h4 class="pull-right">${item.price}</h4>
 										<h4>
 											<a
 												href="Product.jsp?name=${item.productId}?price=${item.price}">${item.color}
@@ -96,6 +99,7 @@
 										<p>Shape : ${item.shape}</p>
 										<p>Balloons left : ${item.quantity}
 									</div>
+
 									<div class="ratings">
 										<p class="pull-right">15 reviews</p>
 										<p>
@@ -110,7 +114,7 @@
 										type="submit" id="addbtn" value="Add to Cart" />
 								</div>
 							</div>
-						</form>
+						</form:form>
 					</c:forEach>
 				</div>
 

@@ -1,5 +1,7 @@
 package com.sapient.model.order;
 
+import java.io.Serializable;
+
 import com.sapient.model.product.Balloon;
 
 /**
@@ -9,10 +11,16 @@ import com.sapient.model.product.Balloon;
  * 
  */
 
-public class OrderDetail {
+public class OrderDetail implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private double taxStatus;
 	private Order order;
 	private Balloon balloon;
+	private double subTotal;
 
 	public double getTaxStatus() {
 		return taxStatus;
@@ -39,6 +47,16 @@ public class OrderDetail {
 	}
 
 	public double calcSubTotal() {
-		return balloon.getQuantity() * balloon.getPrice();
+		this.subTotal = balloon.getQuantity() * balloon.getPrice();
+		return subTotal;
 	}
+
+	public double getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(double subTotal) {
+		this.subTotal = subTotal;
+	}
+	
 }

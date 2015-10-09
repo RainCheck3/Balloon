@@ -49,7 +49,6 @@ public class BalloonDaoImpl implements BalloonDao {
 		Query qry = session.createQuery(hql);
 		List<Balloon> lst = qry.list();
 		session.close();
-		System.out.println(lst);
 		return lst;
 	}
 

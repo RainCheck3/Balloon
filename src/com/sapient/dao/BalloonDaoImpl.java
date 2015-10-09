@@ -104,7 +104,9 @@ public class BalloonDaoImpl implements BalloonDao {
 
 //	// Insert into Order, OrderDetails Table, update products
 //	@Override
-	public void placeOrder(Order order) {
+	public boolean placeOrder(Order order) {
+		return false;
+	}
 //		int orderID = order.hashCode();
 //		String customerID = order.getCustomer().getUsername();
 //		int orderDetailID;
@@ -318,10 +320,5 @@ public class BalloonDaoImpl implements BalloonDao {
 		return (Integer) query.uniqueResult();
 	}
 
-	@Override
-	public boolean placeOrder(Order order) {
-		
-		return false;
-	}
 	
 }

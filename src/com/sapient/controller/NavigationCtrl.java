@@ -49,13 +49,14 @@ public class NavigationCtrl {
 		BalloonDao dao = new BalloonDaoImpl();
 		log.info(session.getAttribute("username"));
 		int customerId = (Integer)dao.getCustomerId("Gunther");
+		session.setAttribute("customerId", customerId);
 		UpdateCustomer customer = dao.getUser(customerId);
 		model.addAttribute("customer", customer);
 		return "MyAccount";
 	}
 
 	@RequestMapping(value = "/acnt", method = RequestMethod.POST)
-	public String updateAccount(@ModelAttribute("customer") @Valid UpdateCustomer customer, BindingResult result) {
+	public String updateAccount(@ModelAttribute("customer") @Valid UpdateCustomer customer, BindingResult result, HttpSession session) {
 //		log.info("first name: " + request.getParameter("fName"));
 //		log.info("last name: " + request.getParameter("lName"));
 		log = Logger.getLogger(NavigationCtrl.class.getName());
@@ -70,7 +71,7 @@ public class NavigationCtrl {
 		{
 			log.info("no errors");
 			BalloonDao updateDB = new BalloonDaoImpl();
-			updateDB.updateUser(customer,10);
+			updateDB.updateUser(customer, (Integer)session.getAttribute("customerId"));
 //			request.getSession().setAttribute("name", fName);
 			return "MyAccount";
 		}

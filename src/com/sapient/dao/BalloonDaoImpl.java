@@ -35,6 +35,7 @@ public class BalloonDaoImpl implements BalloonDao {
 
 	// Construct DAO, establish database connection
 	public BalloonDaoImpl() {
+		
 	}
 
 
@@ -100,7 +101,7 @@ public class BalloonDaoImpl implements BalloonDao {
 
 //	// Insert into Order, OrderDetails Table, update products
 //	@Override
-//	public void placeOrder(Order order) {
+	public void placeOrder(Order order) {
 //		int orderID = order.hashCode();
 //		String customerID = order.getCustomer().getUsername();
 //		int orderDetailID;
@@ -289,7 +290,7 @@ public class BalloonDaoImpl implements BalloonDao {
 
 	@Override
 	public boolean placeOrder(Order order) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

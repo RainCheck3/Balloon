@@ -20,6 +20,15 @@ import com.sapient.model.product.Balloon;
 
 @Controller
 public class CartController {
+	@RequestMapping(value = "/clear", method = RequestMethod.POST)
+	public String clearItems(HttpSession session) {
+		Order order = (Order) session.getServletContext().getAttribute("cart");
+		order.getOrderDetails().clear();
+		session.getServletContext().setAttribute("cart", order);
+		session.getServletContext().setAttribute("total", 0);
+		return "Checkout";
+	}
+	
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
 	public String buyItems(HttpSession session) {
 		Order order = (Order) session.getServletContext().getAttribute("cart");
@@ -67,8 +76,19 @@ public class CartController {
 		}
 
 		session.getServletContext().setAttribute("cart", order);
+		session.getServletContext().setAttribute("total", getTotal(order));
+
 
 		return "Checkout";
-
 	}
+	
+	public double getTotal(Order order) {
+		double total = 0;
+		for (OrderDetail current : order.getOrderDetails()) {
+			total+=current.calcSubTotal();
+		}
+		return total;
+	}
+	
+	
 }

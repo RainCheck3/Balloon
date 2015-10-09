@@ -16,7 +16,7 @@ import com.sapient.model.product.Balloon;
 
 
 @Controller
-@RequestMapping (value="/newcustomer")
+
 public class LoginCtrl {
 
 	@RequestMapping(value= "/log", method = RequestMethod.POST)

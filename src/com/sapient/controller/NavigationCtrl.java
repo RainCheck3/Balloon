@@ -26,7 +26,7 @@ public class NavigationCtrl {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView homePage() {
-		// return "index";
+	
 		return new ModelAndView("index", "orderD", new Balloon());
 	}
 
@@ -53,6 +53,11 @@ public class NavigationCtrl {
 		UpdateCustomer customer = dao.getUser(customerId);
 		model.addAttribute("customer", customer);
 		return "MyAccount";
+	}
+	
+	@RequestMapping(value = "/cart", method = RequestMethod.GET)
+	public String checkout() {
+		return "Checkout";
 	}
 
 	@RequestMapping(value = "/acnt", method = RequestMethod.POST)

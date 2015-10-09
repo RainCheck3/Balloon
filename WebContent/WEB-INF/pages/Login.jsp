@@ -14,7 +14,7 @@
 		<h1>
 			<strong>Welcome.</strong> Please login.
 		</h1>
-		<form:form method="POST" action="/Balloon/newcustomer/log">
+		<form:form method="POST" commandName="command" action="/Balloon/log">
 		<table>
 			<tr>
 				<td>Customer Name :</td>

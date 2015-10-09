@@ -20,7 +20,7 @@
 
 				<div class="col-sm-4 col-lg-4 col-md-4">
 					<div class="thumbnail">
-						<img src="http://placehold.it/320x150" alt="">
+						<img src="http://www.no-refresh.com/blog/wp-content/uploads/2013/04/Custom-Balloon-design-tool.jpg" alt="">
 						<div class="caption">
 							<h4 class="pull-right">$${item.subTotal}</h4>
 							<h4>
@@ -45,8 +45,16 @@
 				</div>
 			</form>
 		</c:forEach>
+		<div>
+		Total: $${applicationScope.total }
+		</div>
+		<div>
+		<form action="/Balloon/clear" method="POST">
+			<input type="submit" value="Clear">
+		</form>
+		</div>
 		<form action="/Balloon/buy" method="POST">
-			<input type="submit" value="Buy">
+			<input type="submit" value="Buy"/>
 		</form>
 	</div>
 	<div class="container"></div>

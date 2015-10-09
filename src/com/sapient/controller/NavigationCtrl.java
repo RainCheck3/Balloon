@@ -19,7 +19,7 @@ public class NavigationCtrl {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView homePage() {
-		// return "index";
+	
 		return new ModelAndView("index", "orderD", new Balloon());
 	}
 

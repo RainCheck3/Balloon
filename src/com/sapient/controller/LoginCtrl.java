@@ -32,6 +32,7 @@ public class LoginCtrl {
 						{
 					      HttpSession session = request.getSession(true);
 					      session.setAttribute("username", loginbean.getUsername());
+                          model.addAttribute("name", loginbean.getUsername());
 					      model.addAttribute("orderD", new Balloon());
 					      return "index";
 						}

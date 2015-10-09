@@ -22,6 +22,9 @@
                     <li style="float:right">
                         <a href="/Balloon/cart">Checkout</a>
                     </li>
+                    <li style="float:right">
+                        <a href="/Balloon/cart">${sessionScope.username}</a>
+                    </li>
                 </ul>
             </div>
            

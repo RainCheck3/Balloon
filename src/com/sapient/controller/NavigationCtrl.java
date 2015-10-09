@@ -39,5 +39,10 @@ public class NavigationCtrl {
 	public String account() {
 		return "MyAccount";
 	}
+	
+	@RequestMapping(value = "/cart", method = RequestMethod.GET)
+	public String checkout() {
+		return "Checkout";
+	}
 
 }

@@ -7,13 +7,13 @@
 <meta charset="utf-8">
 <title>Login Page</title>
 <link rel="stylesheet" type="text/css" href="css/loginStyle.css" />
-<%@include file="header.jsp" %>
 </head>
 <body>
+<h1 style="font-size:90px;text-align:center"><a href="/Balloon/home">BALLOONS!!!!</a></h1>
 <div id="login">
-		<h1>
+		<h3>
 			<strong>Welcome.</strong> Please login.
-		</h1>
+		</h3>
 		<form:form method="POST" commandName="command" action="/Balloon/log">
 		<table>
 			<tr>

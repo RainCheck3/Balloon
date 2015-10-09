@@ -1,5 +1,6 @@
 package com.sapient.model.order;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,11 @@ import com.sapient.model.payment.Payment;
  * @author jxu1 Represents an Order made, with regards to a
  *         specific customer, orderDetail, and payment
  */
-public class Order {
+public class Order implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Calendar calendar;
 	private Date date;
 	private String status;
@@ -69,11 +74,11 @@ public class Order {
 		}
 	}
 
-	public List<OrderDetail> getOrderDetail() {
+	public List<OrderDetail> getOrderDetails() {
 		return orderDetails;
 	}
 
-	public void setOrderDetail(List<OrderDetail> orderDetails) {
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		if (orderDetails == null) {
 			throw new IllegalArgumentException();
 		} else {

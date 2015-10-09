@@ -52,8 +52,8 @@ public class BalloonDaoImpl implements BalloonDao {
 		Query qry = session.createQuery(hql);
 		List<Balloon> lst = qry.list();
 		session.close();
-		System.out.println(lst);
 		return lst;
+		
 	}
 
 	public String getDescription(String productid) {
@@ -214,6 +214,7 @@ public class BalloonDaoImpl implements BalloonDao {
 
 		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
 		Session session = sessionfactory.openSession();
+		
 		Transaction tx = null;
 
 		boolean userStatus = false;

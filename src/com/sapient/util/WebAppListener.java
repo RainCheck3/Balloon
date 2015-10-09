@@ -38,7 +38,7 @@ public class WebAppListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent arg0) {
     	Logger log;
     	
-    	ServletContext ctx = arg0.getServletContext();
+    	/*ServletContext ctx = arg0.getServletContext();
     	
     	log = Logger.getLogger(WebAppListener.class.getName());
 
@@ -46,7 +46,7 @@ public class WebAppListener implements ServletContextListener {
 
 		List<Balloon> inventory;
 		inventory = balloonDao.getInventory();
-		ctx.setAttribute("inv", inventory);
+		ctx.setAttribute("inv", inventory);*/
     }
 	
 }

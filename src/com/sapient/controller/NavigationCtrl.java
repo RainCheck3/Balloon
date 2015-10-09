@@ -25,8 +25,10 @@ public class NavigationCtrl {
 	Logger log;
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView homePage() {
-	
+	public ModelAndView homePage(Balloon ballon, ModelMap model) {
+	     BalloonDaoImpl bdi = new BalloonDaoImpl();
+	     java.util.List<Balloon> invntryList =  bdi.getInventory();
+	     model.addAttribute("items", invntryList);
 		return new ModelAndView("index", "orderD", new Balloon());
 	}
 

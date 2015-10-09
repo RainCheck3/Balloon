@@ -15,15 +15,15 @@
 <!-- Related to the connection END -->
  
 <!-- Related to hibernate properties START -->
-<property name="show_sql">true</property>
-<property name="dialet">org.hibernate.dialect.Oracle10gDialect</property>
+<!-- <property name="show_sql">true</property> -->
+<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
 <property name="hbm2ddl.auto">update</property>
 <!-- Related to hibernate properties END-->
  
 
 <mapping class="com.sapient.model.product.Balloon" />
 <mapping class="com.sapient.model.customer.NewCustomer" />
-
+<mapping class="com.sapient.model.customer.UpdateCustomer" />
  
 </session-factory>
 </hibernate-configuration>

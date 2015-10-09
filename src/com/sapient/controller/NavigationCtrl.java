@@ -2,6 +2,8 @@ package com.sapient.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +19,16 @@ import com.sapient.model.product.Balloon;
 public class NavigationCtrl {
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String homePage(ModelMap model) {
+	public String homePage(ModelMap model, HttpSession session) {
 		BalloonDaoImpl balloonDao = new BalloonDaoImpl();
 		List<Balloon> lst = balloonDao.getInventory();
+		if (session.getAttribute("username")!=null){
+			return "index";
+			
+		}
+		model.addAttribute("command", new LoginBean());
+		return "Login";
 		
-		
-		
-		
-		return "index";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET )

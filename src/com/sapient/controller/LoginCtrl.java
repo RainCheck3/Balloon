@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sapient.dao.BalloonDaoImpl;
 import com.sapient.model.customer.LoginBean;
+import com.sapient.model.product.Balloon;
 
 
 @Controller
@@ -31,6 +32,7 @@ public class LoginCtrl {
 						{
 					      HttpSession session = request.getSession(true);
 					      session.setAttribute("username", loginbean.getUsername());
+					      model.addAttribute("orderD", new Balloon());
 					      return "index";
 						}
 				else 

@@ -1,9 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../../css/loginStyle.css" />
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="css/shop-homepage.css" rel="stylesheet">
 <%@include file="header.jsp" %>
 </head>
 <body>
@@ -12,54 +20,58 @@
 		<h1>
 			<strong>Welcome.</strong> Please SignUp.
 		</h1>
-		<form action="ProcessRequest" method="post">
-			<fieldset>
-				<p>
-					<input type="text" required value="Username" name="Username"
-						onBlur="if(this.value=='')this.value='Username'"
-						onFocus="if(this.value=='Username')this.value='' ">
-				</p>
-				<p>
-					<input type="password" required value="Password" name="Password"
-						onBlur="if(this.value=='')this.value='Password'"
-						onFocus="if(this.value=='Password')this.value='' ">
-				</p>
-
-				<p>
-					<input type="password" required name="RePassword" value="password"
-						onBlur="if(this.value=='')this.value='RePassword'"
-						onFocus="if(this.value=='RePassword')this.value='' ">
-				</p>
-
-				<p>
-					<input type="text" required value="Email" name="Email"
-						onBlur="if(this.value=='')this.value='Email'"
-						onFocus="if(this.value=='Email')this.value='' ">
-				</p>
-
-				<p>
-					<input type="text" required value="Address Line 1" name="Address1"
-						onBlur="if(this.value=='')this.value='Address Line 1'"
-						onFocus="if(this.value=='Address Line 1')this.value='' ">
-				</p>
-
-				<p>
-					<input type="text" required value="Address Line 2" name="Address2"
-						onBlur="if(this.value=='')this.value='Address Line 2'"
-						onFocus="if(this.value=='Address Line 2')this.value='' ">
-				</p>
-
-				<p>
-					<input type="text" required value="PinCode" name="Pincode"
-						onBlur="if(this.value=='')this.value='PinCode'"
-						onFocus="if(this.value=='PinCode')this.value='' ">
-				</p>
-				<p>
-					<input type="submit" value="Signup">
-				</p>
-
-			</fieldset>
-		</form>
+		<form:form action="sign" commandName="customer" method="post">
+	 <table>
+    <tr>
+        <td><form:label path="username">UserName</form:label></td>
+        <td><form:input path="username" /></td>
+    </tr>
+    <tr>
+        <td>Password :</td>
+        <td><form:password path="password"/></td>
+        
+    </tr>
+    <tr>
+        <td><form:label path="firstName">FirstName</form:label></td>
+        <td><form:input path="firstName" /></td>
+    </tr>
+     <tr>
+        <td><form:label path="lastName">LastName</form:label></td>
+        <td><form:input path="lastName" /></td>
+    </tr>
+     <tr>
+        <td><form:label path="street">Street</form:label></td>
+        <td><form:input path="street" /></td>
+    </tr>
+    
+     <tr>
+        <td><form:label path="city">City</form:label></td>
+        <td><form:input path="city" /></td>
+    </tr>
+     <tr>
+        <td><form:label path="state">State</form:label></td>
+        <td><form:input path="state" /></td>
+    </tr>
+     <tr>
+        <td><form:label path="Country">Country</form:label></td>
+        <td><form:input path="Country" /></td>
+    </tr>
+    
+     <tr>
+        <td><form:label path="Email">Email</form:label></td>
+        <td><form:input path="Email" /></td>
+    </tr>
+     <tr>
+        <td><form:label path="zip">Zip</form:label></td>
+        <td><form:input path="zip" /></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="Register"/>
+        </td>
+    </tr>
+</table>  
+	</form:form>
 
 
 

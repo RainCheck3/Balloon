@@ -79,7 +79,7 @@
 				</div>
 
 				<div class="row">
-				${description} ${color} ${shape}
+				
 
 					<c:forEach var="item" items="${items}">
 						<form:form method="post" commandName="orderD"

@@ -97,7 +97,7 @@
 										<h4 class="pull-right">$${item.price}</h4>
 										<h4>
 											<a
-												href="Product.jsp?name=${item.productId}?price=${item.price}">${item.color}
+												href="/Balloon/parameter?pid=${item.productId}">${item.color}
 												Balloon</a>
 										</h4>
 										<p>Shape : ${item.shape}</p>

@@ -30,17 +30,17 @@ import com.sapient.model.customer.NewCustomer;
 import com.sapient.model.customer.UpdateCustomer;
 import com.sapient.model.order.Order;
 import com.sapient.model.order.OrderDetail;
+import com.sapient.model.order.OrderDetails;
+import com.sapient.model.order.Orderz;
 import com.sapient.model.product.Balloon;
 
 public class BalloonDaoImpl implements BalloonDao {
 	Logger log;
-	
-	
+
 	// Construct DAO, establish database connection
 	public BalloonDaoImpl() {
-		
-	}
 
+	}
 
 	// Query the Products Table
 	@Override
@@ -54,27 +54,29 @@ public class BalloonDaoImpl implements BalloonDao {
 		List<Balloon> lst = qry.list();
 		session.close();
 		return lst;
-		
+
 	}
 
-	public String getDescription(String productid) {
+	public Balloon getProduct(String productid) {
 		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
 		Session session = sessionfactory.openSession();
 		Transaction tx = null;
-		Balloon balloon=new Balloon();
-		// try{
-		String hql = "SELECT DESCRIPTION from Balloon B WHERE B.PRODUCTID= productid";
-		Query qry = session.createQuery(hql);
-	    List lst = qry.list();
-		session.close();
-		String desc="";
-		for(Iterator it=lst.iterator();it.hasNext();){
-			
-		    balloon = (Balloon)it.next();
-			desc=balloon.getDescription();
-				
+		Balloon balloon= null;
+		try {
+			tx = session.beginTransaction();
+			balloon = (Balloon) session.get(Balloon.class,productid);
+			tx.commit();
+		} catch (HibernateException ex) {
+			if (tx != null) {
+				tx.rollback();
 			}
-		return desc;
+			ex.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return balloon;
 	}
 
 	// Insert into database
@@ -86,7 +88,7 @@ public class BalloonDaoImpl implements BalloonDao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-		String id=(String) session.save(balloon);
+			String id = (String) session.save(balloon);
 
 			tx.commit();
 
@@ -102,122 +104,124 @@ public class BalloonDaoImpl implements BalloonDao {
 		}
 	}
 
-//	// Insert into Order, OrderDetails Table, update products
-//	@Override
+	// // Insert into Order, OrderDetails Table, update products
+	// @Override
 	public boolean placeOrder(Order order) {
-		return false;
-	}
-//		int orderID = order.hashCode();
-//		String customerID = order.getCustomer().getUsername();
-//		int orderDetailID;
-//		String productID;
-//		double price;
-//		int quantity;
-//		double total;
-//		boolean inStock = true;
-//		int success;
-//
-//		// Iterate through all orderDetails, check if in stock
-//		for (OrderDetail orderDetail : order.getOrderDetail()) {
-//			productID = orderDetail.getBalloon().getID();
-//			quantity = orderDetail.getBalloon().getQuantity();
-//			// Check if product has enough stock
-//			try {
-//				ps = con.prepareStatement("SELECT QUANTITY FROM PRODUCTS WHERE PRODUCTID=?");
-//				ps.setString(1, productID);
-//				rs = ps.executeQuery();
-//
-//				if (rs.next()) {
-//					if (rs.getInt(1) < quantity) {
-//						// Not enough in stock
-//						inStock = false;
-//						break;
-//					}
-//				} else {
-//					inStock = false;
-//					break;
-//				}
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//		}
-//
-//		if (inStock) {
-//			try {
-//				// Insert into order table
-//				ps = con.prepareStatement("INSERT INTO ORDERZ VALUES (?, ?)");
-//				ps.setInt(1, orderID);
-//				ps.setString(2, customerID);
-//
-//				success = ps.executeUpdate();
-//
-//				if (success != 0) {
-//					log.info("Insert into order successful");
-//				}
-//
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//			// Iterate through all orderDetails, insert into orderDetails table
-//			for (OrderDetail orderDetail : order.getOrderDetail()) {
-//				orderDetailID = orderDetail.hashCode();
-//				productID = orderDetail.getBalloon().getID();
-//				price = orderDetail.getBalloon().getPrice();
-//				quantity = orderDetail.getBalloon().getQuantity();
-//				total = orderDetail.calcSubTotal();
-//
-//				try {
-//					// Insert into orderDetails table
-//					ps = con.prepareStatement("INSERT INTO ORDERDETAILS VALUES (?, ?, ?, ?, ?, ?)");
-//					ps.setInt(1, orderDetailID);
-//					ps.setInt(2, orderID);
-//					ps.setString(3, productID);
-//					ps.setDouble(4, price);
-//					ps.setInt(5, quantity);
-//					ps.setDouble(6, total);
-//
-//					success = ps.executeUpdate();
-//
-//					if (success != 0) {
-//						log.info("Insert into orderDetail successful");
-//					}
-//
-//					// Update product table
-//					ps = con.prepareStatement("SELECT QUANTITY FROM PRODUCTS WHERE PRODUCTID=?");
-//					ps.setString(1, productID);
-//					rs = ps.executeQuery();
-//
-//					if (rs.next()) {
-//						// Update product count
-//						int currentQuantity = rs.getInt(1);
-//						ps = con.prepareStatement("UPDATE PRODUCTS SET QUANTITY=? WHERE PRODUCTID=?");
-//						ps.setInt(1, currentQuantity - quantity);
-//						ps.setString(2, productID);
-//						success = ps.executeUpdate();
-//						if (success != 0) {
-//							log.info("Update removal count of product successful");
-//						}
-//					}
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-//		closeConnections();
-//	}
 
+
+		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
+		Session session = sessionfactory.openSession();
+		Transaction tx = null;
+
+		int orderID = order.hashCode();
+		String customerID = order.getCustomer().getUsername();
+		int orderDetailID;
+		String productID;
+		double price;
+		int quantity;
+		double total;
+		boolean inStock = true;
+		int success;
+		Integer Quantity = null;
+
+		// Iterate through all orderDetails, check if in stock
+		for (OrderDetail orderDetail : order.getOrderDetails()) {
+			productID = orderDetail.getBalloon().getID();
+			quantity = orderDetail.getBalloon().getQuantity();
+			tx = session.beginTransaction();
+			String HQL_QUERY = "select product.QUANTITY from PRODUCTS as product where product.PRODUCTID=?";
+			Query query = session.createQuery(HQL_QUERY);
+			query.setParameter(0, productID);
+			Quantity = (Integer) query.uniqueResult();
+
+			if (Quantity < quantity) {
+				// Not enough in stock
+				inStock = false;
+				break;
+
+			} else {
+				inStock = false;
+				break;
+			}
+
+		}
+
+		if (inStock) {
+
+			Orderz orders = new Orderz();
+			orders.setCustomerId(customerID);
+			orders.setOrderId(orderID);
+			try {
+				// Insert into order table
+				Integer id = (Integer) session.save(orders);
+				tx.commit();
+
+				if (id != 0) {
+					log.info("Insert into order successful");
+				}
+
+			} catch (HibernateException ex) {
+				if (tx != null) {
+					tx.rollback();
+				}
+
+				// Iterate through all orderDetails, insert into orderDetails
+				// table
+				for (OrderDetail orderDetail : order.getOrderDetails()) {
+
+					// orderDetailID = orderDetail.hashCode();
+					productID = orderDetail.getBalloon().getID();
+					price = orderDetail.getBalloon().getPrice();
+					quantity = orderDetail.getBalloon().getQuantity();
+					total = orderDetail.calcSubTotal();
+
+					OrderDetails orderdetails = new OrderDetails();
+					orderdetails.setPrice(price);
+					orderdetails.setProductID(productID);
+					orderdetails.setQuantity(quantity);
+					orderdetails.setTotal(total);
+
+					try {
+						// Insert into orderDetails table
+						Integer id = (Integer) session.save(orderdetails);
+						tx.commit();
+
+						if (id != 0) {
+							log.info("Insert into orderDetail successful");
+						}
+
+						// Update product table
+
+						Balloon balloon = (Balloon) session.get(Balloon.class,
+								productID);
+						balloon.setQuantity((quantity - Quantity));
+						tx.commit();
+					} catch (HibernateException e) {
+						if (tx != null) {
+							tx.rollback();
+						}
+						e.printStackTrace();
+					} finally {
+						if (session != null) {
+							session.close();
+						}
+					}
+				}
+
+			}
+		}
+		return true;
+	}
+
+	
+	
 	// Insert into Customer Table
 	@Override
 	public boolean validateLogin(String userName, String passWord) {
 
 		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
 		Session session = sessionfactory.openSession();
-		
+
 		Transaction tx = null;
 
 		boolean userStatus = false;
@@ -227,16 +231,17 @@ public class BalloonDaoImpl implements BalloonDao {
 		query.setParameter(0, userName);
 		query.setParameter(1, passWord);
 		List list = query.list();
-		
-		
-		if((list!=null)&&(list.size()>0)){
+
+		if ((list != null) && (list.size() > 0)) {
 			userStatus = true;
-			}
+		}
 
 		session.close();
 		return userStatus;
 	}
 
+	
+	
 	public void registerUser(NewCustomer newcustomer) {
 
 		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
@@ -244,8 +249,8 @@ public class BalloonDaoImpl implements BalloonDao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-		   Integer id=(Integer)session.save(newcustomer);
-		    tx.commit();
+			Integer id = (Integer) session.save(newcustomer);
+			tx.commit();
 
 		} catch (HibernateException ex) {
 			if (tx != null) {
@@ -259,23 +264,24 @@ public class BalloonDaoImpl implements BalloonDao {
 		}
 	}
 
-	public void updateUser(UpdateCustomer customer,int customerId) {
+	public void updateUser(UpdateCustomer customer, int customerId) {
 		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
 		Session session = sessionfactory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-		    UpdateCustomer updateCustomer=(UpdateCustomer) session.get(UpdateCustomer.class,customerId);
-		    updateCustomer.setCity(customer.getCity());
-		    updateCustomer.setCountry(customer.getCountry());
-		    updateCustomer.setEmail(customer.getEmail());
-		    updateCustomer.setFirstName(customer.getFirstName());
-		    updateCustomer.setLastName(customer.getLastName());
-		    updateCustomer.setState(customer.getState());
-		    updateCustomer.setStreet(customer.getStreet());
-		    updateCustomer.setZip(customer.getZip());
-		    
-		    tx.commit();
+			UpdateCustomer updateCustomer = (UpdateCustomer) session.get(
+					UpdateCustomer.class, customerId);
+			updateCustomer.setCity(customer.getCity());
+			updateCustomer.setCountry(customer.getCountry());
+			updateCustomer.setEmail(customer.getEmail());
+			updateCustomer.setFirstName(customer.getFirstName());
+			updateCustomer.setLastName(customer.getLastName());
+			updateCustomer.setState(customer.getState());
+			updateCustomer.setStreet(customer.getStreet());
+			updateCustomer.setZip(customer.getZip());
+
+			tx.commit();
 
 		} catch (HibernateException ex) {
 			if (tx != null) {
@@ -288,7 +294,7 @@ public class BalloonDaoImpl implements BalloonDao {
 			}
 		}
 	}
-	
+
 	public UpdateCustomer getUser(int customerId) {
 		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
 		Session session = sessionfactory.openSession();
@@ -296,8 +302,9 @@ public class BalloonDaoImpl implements BalloonDao {
 		UpdateCustomer updateCustomer = null;
 		try {
 			tx = session.beginTransaction();
-		    updateCustomer=(UpdateCustomer) session.get(UpdateCustomer.class,customerId);		    
-		    tx.commit();
+			updateCustomer = (UpdateCustomer) session.get(UpdateCustomer.class,
+					customerId);
+			tx.commit();
 		} catch (HibernateException ex) {
 			if (tx != null) {
 				tx.rollback();
@@ -320,5 +327,4 @@ public class BalloonDaoImpl implements BalloonDao {
 		return (Integer) query.uniqueResult();
 	}
 
-	
 }

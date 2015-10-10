@@ -96,5 +96,10 @@ public class Balloon implements Serializable {
 	public void setDescription(String description) {
 		Description = description;
 	}
+
+	public String getID() {
+		// TODO Auto-generated method stub
+		return price+shape+color;
+	}
 	
 }

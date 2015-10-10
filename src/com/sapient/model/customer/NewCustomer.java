@@ -3,6 +3,7 @@ package com.sapient.model.customer;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,7 +21,7 @@ public class NewCustomer {
 	
 	@Id @GeneratedValue
     @Column(name = "CUSTOMERID")
-	private Integer customerId;
+	private String customerId;
 	
 	@Column(name = "USERNAME")
 	private String username;
@@ -52,11 +53,11 @@ public class NewCustomer {
 	@Column(name = "ZIP")
 	private String zip;
 	
-	public Integer getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Integer customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 

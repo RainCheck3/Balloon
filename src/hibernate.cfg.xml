@@ -25,6 +25,8 @@
 <mapping class="com.sapient.model.customer.NewCustomer" />
 <mapping class="com.sapient.model.customer.UpdateCustomer" />
 <mapping class="com.sapient.model.customer.LoginBean"/>
+<mapping class="com.sapient.model.order.OrderDetails"/>
+<mapping class="com.sapient.model.order.Orderz"/>
 
  
 </session-factory>

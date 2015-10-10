@@ -12,7 +12,7 @@ public interface BalloonDao {
 	public void addBalloon(Balloon balloon);
 	public boolean placeOrder(Order order);
 	public boolean validateLogin(String userName, String passWord);
-	public String getDescription( String productid);
+	public Balloon getProduct( String productid);
 	public void registerUser(NewCustomer newcustomer);
 	public void updateUser(UpdateCustomer customer,int customerId);
 	public UpdateCustomer getUser(int customerId);

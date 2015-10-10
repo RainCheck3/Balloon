@@ -19,34 +19,21 @@
 
 
 <body>
-<%
-	String productId=request.getParameter("name");
-     BalloonDaoImpl desc=new BalloonDaoImpl();
-     String description=desc.getDescription(productId);
-    String price=request.getParameter("price");
-%>
-
-
 <div style="position:relative;margin-left:40%;bottom:10;text-align:right; overflow:hidden; height:250px; width:200px">
 <img style="position:absolute; left:100%; margin-left:-300px" src="images/BalloonBorder.jpg"/>
 </div>
 <div>
 <h3 style="padding-right: 150px;">
-<%
-	out.println(productId);
-%>
-
+ ${product.productId}
 </h3>
-<h3 style="margin-right: 150%">Price: <% out.println(price); %></h3>
+<h3 style="margin-right: 150%">Price: ${product.price}</h3>
 </div>
 <div class="container" style='float: left;'>
 
   <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Description</button>
   <div id="demo" class="collapse">
    <p>
-   <%
-	out.println(description);
-   %>
+   ${product.description}
     </p>
   </div>
   <br>

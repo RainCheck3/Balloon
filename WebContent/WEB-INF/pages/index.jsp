@@ -31,11 +31,11 @@
 		<div class="row">
 
 			<div class="col-md-3">
-				<p class="lead">Shop Name</p>
+				<p class="lead">Vendors</p>
 				<div class="list-group">
-					<a href="#" class="list-group-item">Category 1</a> <a href="#"
-						class="list-group-item">Category 2</a> <a href="#"
-						class="list-group-item">Category 3</a>
+					<a href="#" class="list-group-item"> Gurgaon Balloons</a> <a href="#"
+						class="list-group-item">Chicago Balloons</a> <a href="#"
+						class="list-group-item">Banglore Balloons</a>
 				</div>
 			</div>
 
@@ -79,9 +79,9 @@
 				</div>
 
 				<div class="row">
-				${description} ${color} ${shape}
+				
 
-					<c:forEach var="item" items="${applicationScope.inv}">
+					<c:forEach var="item" items="${items}">
 						<form:form method="post" commandName="orderD"
 							action="/Balloon/addcart">
 							<form:hidden path="price" value="${item.price}"></form:hidden>

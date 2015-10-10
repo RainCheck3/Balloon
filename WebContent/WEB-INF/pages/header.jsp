@@ -13,18 +13,20 @@
            
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                     
+                    <li style="float:right">
+                        <a href="/Balloon/cart">${sessionScope.username}</a>
+                    </li>
                     <li style="float:right">
                         <a href="/Balloon/acnt">My Account</a>
                     </li>
                     <li style="float:right">
-                        <a href="/Balloon/login">Login</a>
+                        <a href="/Balloon/${sessionScope.login }">${sessionScope.login }</a>
                     </li>
                     <li style="float:right">
                         <a href="/Balloon/cart">Checkout</a>
                     </li>
-                    <li style="float:right">
-                        <a href="/Balloon/cart">${sessionScope.username}</a>
-                    </li>
+
                 </ul>
             </div>
            

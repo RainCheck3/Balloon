@@ -32,8 +32,18 @@ public class LoginCtrl {
 						{
 					      HttpSession session = request.getSession(true);
 					      session.setAttribute("username", loginbean.getUsername());
+					      if(session.getAttribute("username")==null){
+					  		session.setAttribute("login", "login");
+					  		}
+					  		else {
+					  			session.setAttribute("login", "logout");
+					  		}
+					      
                           model.addAttribute("name", loginbean.getUsername());
 					      model.addAttribute("orderD", new Balloon());
+					      BalloonDaoImpl bdi = new BalloonDaoImpl();
+						  java.util.List<Balloon> invntryList =  bdi.getInventory();
+						  model.addAttribute("items", invntryList);
 					      return "index";
 						}
 				else 

@@ -20,7 +20,7 @@
 
 <body>
 <div style="position:relative;margin-left:40%;bottom:10;text-align:right; overflow:hidden; height:250px; width:200px">
-<img style="position:absolute; left:100%; margin-left:-300px" src="images/BalloonBorder.jpg"/>
+<img style="position:absolute; left:100%; margin-left:-300px" src="http://images.clipartpanda.com/balloon-20clip-20art-balloons3.png"/>
 </div>
 <div>
 <h3 style="padding-right: 150px;">

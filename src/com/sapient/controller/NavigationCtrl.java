@@ -58,7 +58,7 @@ public class NavigationCtrl {
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signupPage(ModelMap model) {
-		model.addAttribute("command", new NewCustomer());
+		model.addAttribute("customer", new NewCustomer());
 		return "Signup";
 	}
 
@@ -75,7 +75,7 @@ public class NavigationCtrl {
 		BalloonDao dao = new BalloonDaoImpl();
 		log.info(session.getAttribute("username"));
 		String uname = (String) session.getAttribute("username");
-		int customerId = (Integer)dao.getCustomerId(uname);
+		String customerId = dao.getCustomerId(uname);
 		session.setAttribute("customerId", customerId);
 		UpdateCustomer customer = dao.getUser(customerId);
 		model.addAttribute("customer", customer);

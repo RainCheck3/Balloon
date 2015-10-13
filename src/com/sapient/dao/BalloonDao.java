@@ -15,6 +15,6 @@ public interface BalloonDao {
 	public Balloon getProduct( String productid);
 	public void registerUser(NewCustomer newcustomer);
 	public void updateUser(UpdateCustomer customer,int customerId);
-	public UpdateCustomer getUser(int customerId);
-	public int getCustomerId(String userName);
+	public UpdateCustomer getUser(String customerId);
+	public String getCustomerId(String userName);
 }

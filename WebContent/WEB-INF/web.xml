@@ -60,7 +60,5 @@
     <servlet-name>Jersey REST Service</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
-  <listener>
-    <listener-class>com.sapient.util.WebAppListener</listener-class>
-  </listener>
+
 </web-app>

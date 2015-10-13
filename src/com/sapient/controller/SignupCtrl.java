@@ -18,13 +18,14 @@ import com.sapient.model.customer.NewCustomer;
 public class SignupCtrl {
 
 	@RequestMapping(value= "/sign", method = RequestMethod.POST)
-	public String addCustomer(@Valid NewCustomer newcustomer, BindingResult result){
+	public String addCustomer(@Valid NewCustomer customer, BindingResult result,  ModelMap model){
 		if(result.hasErrors()){
+			model.addAttribute("customer", new NewCustomer());
 			return "Signup";
 		}
 		else {
 			BalloonDao newUser =  new BalloonDaoImpl();
-		   newUser.registerUser(newcustomer);
+		   newUser.registerUser(customer);
 			return "index";
 	}
 		}
@@ -33,7 +34,7 @@ public class SignupCtrl {
 	@RequestMapping(method=RequestMethod.GET)
 	public String displayCustomerForm(ModelMap model){
 		
-		model.addAttribute("newcustomer", new NewCustomer());
+		model.addAttribute("customer", new NewCustomer());
 		return "Signup";
 	}
 }

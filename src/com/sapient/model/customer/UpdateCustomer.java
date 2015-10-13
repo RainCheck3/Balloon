@@ -17,7 +17,7 @@ public class UpdateCustomer {
 	@Id @GeneratedValue
     @Column(name = "CUSTOMERID")
 	@NotNull
-	private int customerId;
+	private String customerId;
 
 	@Column(name = "USERNAME")
 	@NotEmpty
@@ -51,11 +51,11 @@ public class UpdateCustomer {
 	@Column(name = "ZIP")
 	private String zip;
 	
-	public int getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 

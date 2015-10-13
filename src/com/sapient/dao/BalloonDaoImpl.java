@@ -249,7 +249,7 @@ public class BalloonDaoImpl implements BalloonDao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Integer id = (Integer) session.save(newcustomer);
+			session.save(newcustomer);
 			tx.commit();
 
 		} catch (HibernateException ex) {
@@ -295,7 +295,7 @@ public class BalloonDaoImpl implements BalloonDao {
 		}
 	}
 
-	public UpdateCustomer getUser(int customerId) {
+	public UpdateCustomer getUser(String customerId) {
 		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
 		Session session = sessionfactory.openSession();
 		Transaction tx = null;
@@ -318,13 +318,13 @@ public class BalloonDaoImpl implements BalloonDao {
 		return updateCustomer;
 	}
 
-	public int getCustomerId(String un) {
+	public String getCustomerId(String un) {
 		SessionFactory sessionfactory = HibernateUtil.getSessionFactory();
 		Session session = sessionfactory.openSession();
 		String HQL_QUERY = "select user.customerId from NewCustomer as user where user.username=?";
 		Query query = session.createQuery(HQL_QUERY);
 		query.setParameter(0, un);
-		return (Integer) query.uniqueResult();
+		return (String) query.uniqueResult();
 	}
 
 }
